@@ -8,13 +8,43 @@
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">Blog de Jean Forteroche</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03"
+            aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="home.html.twig">Accueil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Qui suis-je?</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Blog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
 <div id="content">{% block body %}{% endblock %}</div>
 
 <div id="footer">
     {% block footer %}
-        &copy; Copyright 2019 by <a href="https://tolan.me/">you</a>.
+        &copy; Copyright 2019 by <a href="https://tolan.me/">BenCode</a>.
     {% endblock %}
 </div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 
 </body>
 </html>
