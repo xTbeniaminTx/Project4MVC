@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+        <link rel="stylesheet" href="style.css"/>
+        <title>{% block title %}{% endblock %} - My Webpage</title>
+    {% endblock %}
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+{% block header %}{% endblock %}
+
+<div id="content">{% block body %}{% endblock %}</div>
+
+<div id="footer">
+    {% block footer %}
+        &copy; Copyright 2019 by <a href="https://tolan.me/">you</a>.
+    {% endblock %}
+</div>
+
+</body>
+</html>
