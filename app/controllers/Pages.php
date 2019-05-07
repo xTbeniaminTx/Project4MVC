@@ -6,10 +6,14 @@
     }
     
     public function index() {
-      $data = [
-        'title' => 'Bienvenuto'
-      ];
-      $this->view('pages/index', $data);
+        require_once 'vendor/autoload.php';
+        $loader = new \Twig\Loader\FilesystemLoader('views');
+        $twig = new \Twig\Environment($loader, [
+            'auto_load' => true,
+        ]);
+
+        $vue = $twig->load('pages/home.html');
+        echo $vue->render(['titre' => "salut"]);
     }
    
     public function about() {
