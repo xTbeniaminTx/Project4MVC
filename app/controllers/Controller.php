@@ -17,17 +17,4 @@ class Controller
         return new $model();
     }
 
-    // Load view
-    public function view($view, $data = [])
-    {
-        // Check for view file
-        if (file_exists('../app/views/' . $view . '.twig')) {
-            //header
-            require_once '../app/views/' . $view . '.twig';
-            //footer
-        } else {
-            // View does not exist
-            die('View does not exist');
-        }
-    }
 }

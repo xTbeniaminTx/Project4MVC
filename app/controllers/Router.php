@@ -5,7 +5,6 @@
  * URL FORMAT - /controller/method/params
  */
 
-namespace App\Core;
 
 class Router {
     protected $currentController = 'Pages';
