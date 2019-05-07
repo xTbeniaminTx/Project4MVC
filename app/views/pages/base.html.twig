@@ -2,14 +2,12 @@
 <html>
 <head>
     {% block head %}
-        <link rel="stylesheet" href="style.css"/>
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
         <title>{% block title %}{% endblock %} - My Webpage</title>
     {% endblock %}
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
-{% block header %}{% endblock %}
-
 <div id="content">{% block body %}{% endblock %}</div>
 
 <div id="footer">
