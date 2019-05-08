@@ -8,13 +8,14 @@
 
 class Router {
     protected $currentController = 'Pages';
-    protected $currentMethod = 'index';
+    protected $currentMethod = 'contact';
     protected $params = [];
 
     public function __construct() {
 //       print_r($this -> getUrl());
 
         $url = $this -> getUrl();
+
 
         // Regarde dans le controleurs pour la premiere valeur index
         if(file_exists('../app/controllers/' . ucwords($url[0]) . '.php')) {
@@ -56,5 +57,6 @@ class Router {
             $url = explode('/', $url);
             return $url;
         }
+
     }
 }

@@ -1,7 +1,7 @@
 <?php 
 
 require_once 'config/config.php';
-
+require_once '../vendor/autoload.php';
 
 spl_autoload_register(function ($class) {
     $root = dirname(APPROOT);   // get the parent directory
