@@ -1,14 +1,15 @@
 <?php
 
-require_once '../app/bootstrap.php';
+if($_GET)
+{
+    $request = $_GET['action'];
+}
+else
+{
+    $request = "";
+}
 
+require_once('../app/Router.php');
 
-//Initialisation de nouveau libraire
-$init = new Router();
-
-
-
-
-
-  
-
+$routeur = new Router($request);
+$routeur->renderController();
