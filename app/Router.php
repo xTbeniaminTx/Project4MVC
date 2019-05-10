@@ -14,6 +14,7 @@ class Router
         "" => ["controllers" => 'BaseController', "method" => 'home'],
         "home" => ["controllers" => 'BaseController', "method" => 'home'],
         "contact" => ["controllers" => 'BaseController', "method" => 'contact'],
+        "books" => ["controllers" => 'BaseController', "method" => 'books'],
     ];
 
     private $routesAdmin = [
