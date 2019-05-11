@@ -18,7 +18,8 @@ class Router
     ];
 
     private $routesAdmin = [
-        "adminView" => ["controllers" => 'AdminController', "method" => 'adminView']
+        "adminView" => ["controllers" => 'AdminController', "method" => 'adminView'],
+        "adminComments" => ["controllers" => 'AdminController', "method" => 'adminComments']
     ];
 
     public function __construct($request)
@@ -38,15 +39,15 @@ class Router
                 $currentController = new $controller();
                 $currentController->$method();
             } elseif (key_exists($request, $this->routesAdmin)) {
-                if (isset($_SESSION['login'])) {
+//                if (isset($_SESSION['login'])) {
                     $controller = $this->routesAdmin[$request]['controllers'];
                     $method = $this->routesAdmin[$request]['method'];
 
                     $currentController = new $controller();
                     $currentController->$method();
-                } else {
-                    throw new Exception(' vous n\'avez pas accès, veuillez vous connecter');
-                }
+//                } else {
+//                    throw new Exception(' vous n\'avez pas accès, veuillez vous connecter');
+//                }
             } else {
                 throw new Exception(' 404 aucune page trouvée');
             }

@@ -19,7 +19,7 @@
     {% block stylesheets %}{% endblock %}
 </head>
 <body>
-
+{% block navigation %}
 <nav class="navbar navbar-toggleable-sm fixed-top navbar-inverse bg-primary app-navbar">
     <button
             class="navbar-toggler navbar-toggler-right hidden-md-up"
@@ -63,7 +63,7 @@
 
     </div>
 </nav>
-
+{% endblock %}
 <div id="content">{% block body %}{% endblock %}</div>
 
 <!-- Footer -->
