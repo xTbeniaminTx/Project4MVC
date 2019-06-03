@@ -1,0 +1,124 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    <title>
+        {{ title }}
+    </title>
+{% endblock %}
+
+{% block body %}
+    <section id="showcase" class="d-flex justify-content-center align-items-center">
+        <div id="overlay"></div>
+        <div id="header" class="container text-white text-center">
+            <h3 class="display-5 mb-0">DÉCOUVREZ SON NOUVEAU ROMAN</h3>
+            <h1 class="display-3">"Billet simple pour l'Alaska"</h1>
+            <p class="lead d-none d-md-block">"Chaque secret de l'âme d'un écrivain, chaque expérience de sa vie, chaque
+                qualité de son esprit est écrit en grand dans ses œuvres."</p>
+            <button id="chapters" class="btn btn-lg btn-primary px-5">LIRE LES CHAPITRES</button>
+        </div>
+    </section>
+    <section>
+        <div class="container text-center mt-5">
+            <h2>CHOISIR UN CHAPITRE</h2>
+            <div class="row">
+                <div class="col-md-4 p-3">
+                    <img src="images/icons/nature.png" alt="" class="img-fluid">
+                    <h3>Chapitre 1</h3>
+                    <p class="lead d-none d-sm-inline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque
+                        dolore doloribus ea
+                        iste, itaque quo quod repudiandae sint unde. Aperiam consequatur doloremque error esse
+                        exercitationem ipsum itaque maiores officia optio!</p>
+                </div>
+                <div class="col-md-4 p-3">
+                    <img src="images/icons/nature.png" alt="" class="img-fluid">
+                    <h3>Chapitre 2</h3>
+                    <p class="lead d-none d-sm-inline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque
+                        dolore doloribus ea
+                        iste, itaque quo quod repudiandae sint unde. Aperiam consequatur doloremque error esse
+                        exercitationem ipsum itaque maiores officia optio!</p>
+                </div>
+                <div class="col-md-4 p-3">
+                    <img src="images/icons/nature.png" alt="" class="img-fluid">
+                    <h3>Chapitre 3</h3>
+                    <p class="lead d-none d-sm-inline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque
+                        dolore doloribus ea
+                        iste, itaque quo quod repudiandae sint unde. Aperiam consequatur doloremque error esse
+                        exercitationem ipsum itaque maiores officia optio!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container text-center mt-2 p-3">
+            <h3>CHOISIR VOTRE THEME</h3>
+            <div class="row m-2">
+                <div class="col-md-6 p-3">
+                    <div class="card">
+                        <img src="images/winter.png" alt="" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title text-primary">Romains fantastique</h2>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                                architecto, aspernatur aut culpa dignissimos doloremque dolores doloribus eius et hic
+                                ipsam iste itaque nobis non quam reiciendis rem sunt temporibus.</p>
+                            <a href="" class="btn btn-lg btn-outline-primary">Commencer</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 p-3">
+                    <div class="card">
+                        <img src="images/dogs.png" alt="" class="card-img-top">
+                        <div class="card-body">
+                            <h2 class="card-title text-primary">Romains d'aventure</h2>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
+                                architecto, aspernatur aut culpa dignissimos doloremque dolores doloribus eius et hic
+                                ipsam iste itaque nobis non quam reiciendis rem sunt temporibus.</p>
+                            <a href="" class="btn btn-lg btn-outline-primary">Commencer</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quotes">
+        <div class="container text-center mt-4">
+            <h3>VOICI les Meilleurs COMMENTQIRES DE NOS LECTEURS</h3>
+            <div class="row">
+                <div class="col-md-4 my-2">
+                    <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                    <blockquote class="blockquote">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores, consequuntur
+                            debitis eaque eos error explicabo ipsum quae sit.
+                        </p>
+                        <footer class="blockquote-footer">Mark Twain</footer>
+                    </blockquote>
+                </div>
+                <div class="col-md-4 my-2">
+                    <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                    <blockquote class="blockquote">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores, consequuntur
+                            debitis eaque eos error explicabo ipsum quae sit.
+                        </p>
+                        <footer class="blockquote-footer">Mark Twain</footer>
+                    </blockquote>
+                </div>
+                <div class="col-md-4 my-2">
+                    <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
+                    <blockquote class="blockquote">
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores, consequuntur
+                            debitis eaque eos error explicabo ipsum quae sit.
+                        </p>
+                        <footer class="blockquote-footer">Mark Twain</footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
