@@ -47,22 +47,65 @@ class AdminController extends Controller
 
     }
 
-    public function addChapters() {
-        if ($this->isLoggedIn()) {
-            $data = [
-                'title' => '',
-                'body' => '',
-            ];
-            global $twig;
-            $vue = $twig->load('admin.add.chapters.html.twig');
-            echo $vue->render($data);
-        } else {
-            header('Location: index.php?action=adminLogin');
-        }
+    public function addChapters()
+    {
+//        if ($this->isLoggedIn()) {
 
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                //Sanitize the post
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+                $data = [
+                    'title' => trim($_POST['title']),
+                    'content' => trim($_POST['content']),
+                    'admin_id' => $_SESSION['admin_id'],
+                    'title_err' => '',
+                    'content_err' => '',
+                ];
+
+                //Validate data
+                if (empty($data['title'])) {
+                    $data['title_err'] = 'Veuillez entre un titre';
+                }
+                if (empty($data['content'])) {
+                    $data['content_err'] = 'Veuillez entre un contenu pour votre chapitre';
+                }
+
+                //make sure errors are empty
+                if (empty($data['title_err']) && empty($data['content_err'])) {
+                    //validated
+                    if ($this->chapterModel->addChapter($data)) {
+                        header('Location: index.php?action=chapters');
+                    } else {
+                        die('qq deterible ');
+                    }
+
+                } else {
+                    //load view with errors
+                    global $twig;
+                    $vue = $twig->load('admin.add.chapters.html.twig');
+                    echo $vue->render($data);
+                }
+            } else {
+                $data = [
+                    'title' => '',
+                    'content' => '',
+                ];
+                global $twig;
+                $vue = $twig->load('admin.add.chapters.html.twig');
+                echo $vue->render($data);
+            }
+
+
+//        } else {
+//            header('Location: index.php?action=adminLogin');
+//        }
     }
 
-    public function adminComments()
+
+    public
+    function adminComments()
     {
         if ($this->isLoggedIn()) {
             global $twig;
@@ -77,7 +120,8 @@ class AdminController extends Controller
     }
 
 
-    public function adminLogin()
+    public
+    function adminLogin()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //process form
@@ -152,14 +196,16 @@ class AdminController extends Controller
 
     }
 
-    public function createSession($login)
+    public
+    function createSession($login)
     {
         $_SESSION['admin_id'] = $login->id;
         $_SESSION['admin_email'] = $login->email;
         header('Location: index.php?action=adminChapters');
     }
 
-    public function logout()
+    public
+    function logout()
     {
         unset($_SESSION['admin_id']);
         unset($_SESSION['admin_email']);
@@ -167,7 +213,8 @@ class AdminController extends Controller
         header('Location: index.php?action=adminLogin');
     }
 
-    public function isLoggedIn()
+    public
+    function isLoggedIn()
     {
         if (isset($_SESSION['admin_id'])) {
             return true;

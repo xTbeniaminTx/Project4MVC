@@ -22,6 +22,7 @@ class Router
         "bio" => ["controllers" => 'BaseController', "method" => 'bio'],
     ];
 
+
     private $routesAdmin = [
         "adminView" => ["controllers" => 'AdminController', "method" => 'adminView'],
         "adminComments" => ["controllers" => 'AdminController', "method" => 'adminComments'],
