@@ -12,7 +12,9 @@ class BaseController extends Controller
 
     public function home()
     {
-        // $chapterManager = new Blog\Model\ChapterManager();
+        if ($this->isLoggedIn()) {
+            header('Location: index.php?action=adminView');
+        }
 
         global $twig;
         $vue = $twig->load('home.html.twig');
@@ -69,5 +71,14 @@ class BaseController extends Controller
             'ben' => 'Beniamin Tolan'
         ]);
 
+    }
+
+    public function isLoggedIn()
+    {
+        if (isset($_SESSION['admin_id'])) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

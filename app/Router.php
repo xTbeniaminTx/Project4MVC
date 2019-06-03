@@ -26,6 +26,7 @@ class Router
         "adminView" => ["controllers" => 'AdminController', "method" => 'adminView'],
         "adminComments" => ["controllers" => 'AdminController', "method" => 'adminComments'],
         "adminChapters" => ["controllers" => 'AdminController', "method" => 'adminChapters'],
+        "addChapters" => ["controllers" => 'AdminController', "method" => 'addChapters'],
         "adminLogin" => ["controllers" => 'AdminController', "method" => 'adminLogin'],
         "logout" => ["controllers" => 'AdminController', "method" => 'logout'],
     ];

@@ -47,6 +47,21 @@ class AdminController extends Controller
 
     }
 
+    public function addChapters() {
+        if ($this->isLoggedIn()) {
+            $data = [
+                'title' => '',
+                'body' => '',
+            ];
+            global $twig;
+            $vue = $twig->load('admin.add.chapters.html.twig');
+            echo $vue->render($data);
+        } else {
+            header('Location: index.php?action=adminLogin');
+        }
+
+    }
+
     public function adminComments()
     {
         if ($this->isLoggedIn()) {

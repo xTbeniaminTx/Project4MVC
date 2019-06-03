@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+        <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="keywords" content="">
+        <meta name="author" content="">
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+              integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+              crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,500,700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Questrial" rel="stylesheet">
+        <link rel="stylesheet" href="css/style.css"/>
+        {% block title %}
+            <title>{{ title }}</title>
+        {% endblock %}
+    {% endblock %}
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+{% block navigation %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+        <a href="index.php?action=adminView" class="navbar-brand">
+            <h3 class="mb-y">JF - Admin</h3>
+        </a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#mainNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a href="index.php?action=adminChapters" class="nav-link">Chapitres</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.php?action=adminComments" class="nav-link">Comentaires</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="index.php?action=home" class="nav-link">Deconnexion</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="mt-5 pt-5 py-5 px-2">
+            <div class="row">
+                <div class="col-md-4 d-none d-lg-block">
+                    <div class="list-group">
+                        {% block pagesActive %}
+                            <a href="index.php?action=adminView" class="list-group-item list-group-item-action">Dashboard</a>
+                            <a href="index.php?action=adminChapters" class="list-group-item list-group-item-action">Chapitres</a>
+                            <a href="index.php?action=adminComments" class="list-group-item list-group-item-action">Commentaires</a>
+                        {% endblock %}
+                        <a href="index.php?action=logout" class="list-group-item list-group-item-action">Logout</a>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    {% block principal %}
+                        <div class="card card-body bg-light ">
+                            <h2>Ajouter Chapitre</h2>
+                            <p>Ajouter un chapitre avec cet formulaire</p>
+                            <form action="index.php?action=addChapters" method="POST">
+                                <div class="form-group">
+                                    <label for="title" >Titre</label>
+                                    <input type="title" name="title"
+                                           class="form-control form-control-lg{{ (title_err is not empty) ? 'is-invalid' : '' }}" placeholder="Votre titre ici"
+                                           value="{{ title }}">
+                                    <span class="invalid-feedback">{{ title_err }}</span>
+
+                                    <label for="content">Contenu</label>
+                                    <textarea  name="content"
+                                           class="form-control {{ (content_err is not empty) ? 'is-invalid' : '' }}"
+                                           placeholder="Votre contenu ici">{{ content }}</textarea>
+                                    <span class="invalid-feedback">{{ content_err }}</span>
+                                </div>
+                                <input type="submit" class="btn btn-success" value="Ajouter">
+
+                            </form>
+                        </div>
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+<footer class="text-center bg-secondary" id="adminFooter">
+    <p>Copyright Beniamin Tolan</p>
+</footer>
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            crossorigin="anonymous"></script>
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+{% endblock %}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
