@@ -49,58 +49,58 @@ class AdminController extends Controller
 
     public function addChapters()
     {
-//        if ($this->isLoggedIn()) {
+        if ($this->isLoggedIn()) {
 
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            //Sanitize the post
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                //Sanitize the post
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            $data = [
-                'title' => trim($_POST['title']),
-                'content' => trim($_POST['content']),
-                'admin_id' => $_SESSION['admin_id'],
-                'title_err' => '',
-                'content_err' => '',
-            ];
+                $data = [
+                    'title' => trim($_POST['title']),
+                    'content' => trim($_POST['content']),
+                    'admin_id' => $_SESSION['admin_id'],
+                    'title_err' => '',
+                    'content_err' => '',
+                ];
 
-            //Validate data
-            if (empty($data['title'])) {
-                $data['title_err'] = 'Veuillez entre un titre';
-            }
-            if (empty($data['content'])) {
-                $data['content_err'] = 'Veuillez entre un contenu pour votre chapitre';
-            }
-
-            //make sure errors are empty
-            if (empty($data['title_err']) && empty($data['content_err'])) {
-                //validated
-                if ($this->chapterModel->addChapter($data)) {
-                    header('Location: index.php?action=chapters');
-                } else {
-                    die('qq deterible ');
+                //Validate data
+                if (empty($data['title'])) {
+                    $data['title_err'] = 'Veuillez entre un titre';
+                }
+                if (empty($data['content'])) {
+                    $data['content_err'] = 'Veuillez entre un contenu pour votre chapitre';
                 }
 
+                //make sure errors are empty
+                if (empty($data['title_err']) && empty($data['content_err'])) {
+                    //validated
+                    if ($this->chapterModel->addChapter($data)) {
+                        header('Location: index.php?action=chapters');
+                    } else {
+                        die('qq deterible ');
+                    }
+
+                } else {
+                    //load view with errors
+                    global $twig;
+                    $vue = $twig->load('admin.add.chapters.html.twig');
+                    echo $vue->render($data);
+                }
             } else {
-                //load view with errors
+                $data = [
+                    'title' => '',
+                    'content' => '',
+                ];
                 global $twig;
                 $vue = $twig->load('admin.add.chapters.html.twig');
                 echo $vue->render($data);
             }
+
+
         } else {
-            $data = [
-                'title' => '',
-                'content' => '',
-            ];
-            global $twig;
-            $vue = $twig->load('admin.add.chapters.html.twig');
-            echo $vue->render($data);
+            header('Location: index.php?action=adminLogin');
         }
-
-
-//        } else {
-//            header('Location: index.php?action=adminLogin');
-//        }
     }
 
 
@@ -121,75 +121,79 @@ class AdminController extends Controller
 
     public function adminLogin()
     {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            //process form
-            //Sanitaze POST data
-            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+        if ($this->isLoggedIn()) {
+            header('Location: index.php?action=adminView');
+        } else {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                //process form
+                //Sanitaze POST data
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-            //init data
-            $data = [
-                'email' => trim($_POST['email']),
-                'email_err' => '',
-                'password' => trim($_POST['password']),
-                'password_err' => ''
-            ];
-
-
-            //check if email is entered
-            if (empty($data['email'])) {
-                $data['email_err'] = 'Veuillez entre votre email';
-            }
-
-            //check if password is entered
-            if (empty($data['password'])) {
-                $data['password_err'] = 'Veuillez entre votre mot de passe';
-            }
-
-            //check for email
-            if ($this->loginModel->findByEmail($data['email'])) {
-                //email found
-            } else {
-                $data['email_err'] = 'No user found';
-            }
-
-            //make sure errors are empty
-            if (empty($data['email_err']) && empty($data['password_err'])) {
-                //validated
-                //check and set logged user
+                //init data
+                $data = [
+                    'email' => trim($_POST['email']),
+                    'email_err' => '',
+                    'password' => trim($_POST['password']),
+                    'password_err' => ''
+                ];
 
 
-                $loggedInAdmin = $this->loginModel->login($data['email'], $data['password']);
+                //check if email is entered
+                if (empty($data['email'])) {
+                    $data['email_err'] = 'Veuillez entre votre email';
+                }
 
-                if ($loggedInAdmin) {
-                    //create session
-                    $this->createSession($loggedInAdmin);
+                //check if password is entered
+                if (empty($data['password'])) {
+                    $data['password_err'] = 'Veuillez entre votre mot de passe';
+                }
+
+                //check for email
+                if ($this->loginModel->findByEmail($data['email'])) {
+                    //email found
                 } else {
-                    $data['password_err'] = 'Mot de passe inccorect';
+                    $data['email_err'] = 'No user found';
+                }
+
+                //make sure errors are empty
+                if (empty($data['email_err']) && empty($data['password_err'])) {
+                    //validated
+                    //check and set logged user
+
+
+                    $loggedInAdmin = $this->loginModel->login($data['email'], $data['password']);
+
+                    if ($loggedInAdmin) {
+                        //create session
+                        $this->createSession($loggedInAdmin);
+                    } else {
+                        $data['password_err'] = 'Mot de passe inccorect';
+                        //load view with errors
+                        global $twig;
+                        $vue = $twig->load('admin.login.html.twig');
+                        echo $vue->render($data);
+                    }
+                } else {
                     //load view with errors
                     global $twig;
                     $vue = $twig->load('admin.login.html.twig');
                     echo $vue->render($data);
                 }
+
             } else {
-                //load view with errors
+                //init data
+                $data = [
+                    'email' => '',
+                    'email_err' => '',
+                    'password' => '',
+                    'password_err' => ''
+                ];
+
+                //load view
                 global $twig;
                 $vue = $twig->load('admin.login.html.twig');
                 echo $vue->render($data);
             }
-
-        } else {
-            //init data
-            $data = [
-                'email' => '',
-                'email_err' => '',
-                'password' => '',
-                'password_err' => ''
-            ];
-
-            //load view
-            global $twig;
-            $vue = $twig->load('admin.login.html.twig');
-            echo $vue->render($data);
         }
 
     }
