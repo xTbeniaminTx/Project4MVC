@@ -34,4 +34,9 @@ class Chapter
             return false;
         }
     }
+
+    public function show($id)
+    {
+
+    }
 }
