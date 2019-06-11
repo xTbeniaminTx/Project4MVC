@@ -29,15 +29,17 @@
 
                 <!-- Blog Entries Column -->
                 <div class="col-md-8">
-
+                    {{ dump(chapters) }}
                     <!-- First Blog Post -->
                     {% for chapter in chapters %}
                         <div class="card card-body mb-3">
+
                             <h4><a href="#">{{ chapter.title |raw }}</a></h4>
                             <div class="bg-light p-2 mb-3">ecrit par JF le {{ chapter.content_date|date("m/d/Y") }}</div>
                         </div>
 
-                        <img class="img-fluid" src="http://placehold.it/730x250" alt="">
+{#                        <img class="img-fluid" src="http://placehold.it/730x250" alt="">#}
+                        <img class="img-fluid" src="https://picsum.photos/id/{{ chapter.id + photoId }}/730/250" alt="">
 
                         <p class="card-text">
                             {{ chapter.content |raw }}

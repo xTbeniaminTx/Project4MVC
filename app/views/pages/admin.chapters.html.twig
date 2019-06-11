@@ -30,11 +30,10 @@
             <li class="breadcrumb-item active" aria-current="page">Chapters</li>
         </ol>
     </nav>
-    {{ chapter_message }}
     <table class="table table-responsive-md table-hover">
         <thead>
         <tr>
-            <th scope="col">#</th>
+{#            <th scope="col">#</th>#}
             <th scope="col">Chapitre</th>
             <th scope="col"><i class="fa fa-edit" aria-hidden="true"></i></th>
             <th scope="col"><i class="fa fa-trash" aria-hidden="true"></i></th>
@@ -44,8 +43,8 @@
         {% for chapter in chapters %}
             <tr>
 
-                <th scope="row">{{ loop.index }}</th>
-                <td><a href="">{{ chapter.title }}</a></td>
+{#                <th scope="row">{{ loop.index }}</th>#}
+                <td><a href="">{{ chapter.title |raw }}</a></td>
                 <td><a href="">approuve</a></td>
                 <td><a href="">desapprouve</a></td>
 

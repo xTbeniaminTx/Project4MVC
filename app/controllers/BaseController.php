@@ -40,11 +40,13 @@ class BaseController extends Controller
     public function chapters()
     {
         $chapters = $this->chapterModel->getChapters();
+        $photoId = rand(10, 50);
 
         $data = [
             'title' => "Admin Chapters",
             'chapters' => $chapters,
-            'ben' => 'Beniamin Tolan'
+            'ben' => 'Beniamin Tolan',
+            'photoId' => $photoId
         ];
         global $twig;
         $vue = $twig->load('chapters.html.twig');
@@ -56,7 +58,8 @@ class BaseController extends Controller
         $chapters = $this->chapterModel->getChaptersById($_GET['id']);
 
         $data = [
-          'chapters' => $chapters
+            'chapters' => $chapters,
+            'id' => $_GET['id'] + rand(10, 50)
         ];
         global $twig;
         $vue = $twig->load('chapter.html.twig');
