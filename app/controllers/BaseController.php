@@ -51,14 +51,16 @@ class BaseController extends Controller
         echo $vue->render($data);
     }
 
-    public function chapter()
+    public function showChapter($id)
     {
+        $chapters = $this->chapterModel->getChaptersById($id);
+
+        $data = [
+          'chapters' => $chapters
+        ];
         global $twig;
         $vue = $twig->load('chapter.html.twig');
-        echo $vue->render([
-            'titre' => "salut",
-            'ben' => 'Beniamin Tolan'
-        ]);
+        echo $vue->render($data);
 
     }
 

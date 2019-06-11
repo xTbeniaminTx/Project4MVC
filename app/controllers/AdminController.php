@@ -109,6 +109,18 @@ EOD;
         }
     }
 
+//    public function showChapter($id)
+//    {
+//        $data = [
+//            'title' => '',
+//            'content' => '',
+//        ];
+//        global $twig;
+//        $vue = $twig->load('admin.add.chapters.html.twig');
+//        echo $vue->render($data);
+//
+//    }
+
 
     public function adminComments()
     {

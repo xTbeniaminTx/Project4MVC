@@ -23,7 +23,7 @@ class Router
         "home" => ["controllers" => 'BaseController', "method" => 'home'],
         "contact" => ["controllers" => 'BaseController', "method" => 'contact'],
         "chapters" => ["controllers" => 'BaseController', "method" => 'chapters'],
-        "chapter" => ["controllers" => 'BaseController', "method" => 'chapter'],
+        "showChapter" => ["controllers" => 'BaseController', "method" => 'showChapter'],
         "bio" => ["controllers" => 'BaseController', "method" => 'bio'],
     ];
 

@@ -35,8 +35,14 @@ class Chapter
         }
     }
 
-    public function show($id)
-    {
+    public function getChaptersById($id) {
+        $this->db->query('SELECT * FROM chapters WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+
+        return $row;
 
     }
+
 }
