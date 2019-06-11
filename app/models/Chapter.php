@@ -11,7 +11,7 @@ class Chapter
 
     public function getChapters()
     {
-        $this->db->query('SELECT * FROM chapters');
+        $this->db->query("SELECT * FROM chapters ORDER BY id DESC");
 
         $results = $this->db->resultSet();
 

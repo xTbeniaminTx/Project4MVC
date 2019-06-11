@@ -51,9 +51,9 @@ class BaseController extends Controller
         echo $vue->render($data);
     }
 
-    public function showChapter($id)
+    public function showChapter()
     {
-        $chapters = $this->chapterModel->getChaptersById($id);
+        $chapters = $this->chapterModel->getChaptersById($_GET['id']);
 
         $data = [
           'chapters' => $chapters

@@ -57,7 +57,7 @@ class AdminController extends Controller
                     <div class="alert alert-success" id="msg-flash" role="alert">Nouveau chapitre ajoute avec success</div>
 EOD;
 
-//                var_dump($message_chapter);
+//                var_dump($message_chapter);die;
 
 
                 $data = [

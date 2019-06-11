@@ -19,3 +19,5 @@ $twig = new \Twig\Environment($loader, [
     'auto_load' => true,
     'debug' => true
 ]);
+//https://github.com/nlemoine/twig-dump-extension
+$twig->addExtension(new \HelloNico\Twig\DumpExtension());

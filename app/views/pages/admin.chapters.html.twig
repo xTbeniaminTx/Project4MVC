@@ -8,8 +8,11 @@
 {% endblock %}
 
 {% block principal %}
-    {{ chapter_message }}
-    {#    {{ dump(chapter_message) }}#}
+{#    <div class="row">#}
+{#        {{ chapter_message }}#}
+{#    </div>#}
+
+
     {#    <div class="alert alert-success" id="msg-flash">Nouveau chapitre ajoute avec success</div>#}
     <div class="row">
         <div class="col-md-6">
@@ -43,7 +46,7 @@
         <tbody>
         {% for chapter in chapters %}
             <tr>
-
+{{ dump(chapter) }}
                 <th scope="row">{{ loop.index }}</th>
                 <td><a href="">{{ chapter.title }}</a></td>
                 <td><a href="">approuve</a></td>
