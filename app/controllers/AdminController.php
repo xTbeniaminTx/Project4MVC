@@ -29,10 +29,7 @@ class AdminController extends Controller
     {
         if ($this->isLoggedIn()) {
             $chapters = $this->chapterModel->getChapters();
-//            var_dump($chapters);die;
-//            $titles = "Eéééesff";
-//            $chapitres = iconv(mb_detect_encoding($titles, mb_detect_order(), true), "UTF-8", $titles);
-//           echo($titles);die;
+
             $data = [
                 'title' => "Admin Chapters",
                 'chapters' => $chapters,
@@ -76,7 +73,7 @@ class AdminController extends Controller
                 if (empty($data['title_err']) && empty($data['content_err'])) {
                     //validated
                     if ($this->chapterModel->addChapter($data)) {
-                        header('Location: index.php?action=chapters');
+                        header('Location: index.php?action=adminChapters');
                     } else {
                         die('qq deterible ');
                     }
