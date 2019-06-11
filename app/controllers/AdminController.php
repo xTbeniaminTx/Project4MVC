@@ -29,11 +29,17 @@ class AdminController extends Controller
     {
         if ($this->isLoggedIn()) {
             $chapters = $this->chapterModel->getChapters();
+            $chapter_message = flash('chapter_message');
+            $message_chapter = <<<EOD
+                    $chapter_message
+EOD;
+
 
             $data = [
                 'title' => "Admin Chapters",
                 'chapters' => $chapters,
-                'ben' => 'Beniamin Tolan'
+                'ben' => 'Beniamin Tolan',
+                'chapter_message' => $message_chapter
             ];
             global $twig;
             $vue = $twig->load('admin.chapters.html.twig');
@@ -57,8 +63,6 @@ class AdminController extends Controller
                     <div class="alert alert-success" id="msg-flash" role="alert">Nouveau chapitre ajoute avec success</div>
 EOD;
 
-//                var_dump($message_chapter);die;
-
 
                 $data = [
                     'title' => trim($_POST['title']),
@@ -66,7 +70,6 @@ EOD;
                     'admin_id' => $_SESSION['admin_id'],
                     'title_err' => '',
                     'content_err' => '',
-                    'chapter_message' => $message_chapter
                 ];
 
                 //Validate data
@@ -81,8 +84,8 @@ EOD;
                 if (empty($data['title_err']) && empty($data['content_err'])) {
                     //validated
                     if ($this->chapterModel->addChapter($data)) {
-                        flash('chapter_message', 'Nouveau chapitre ajoute avec success');
                         header('Location: index.php?action=adminChapters');
+                        flash('chapter_message', 'Nouveau chapitre ajoute avec success');
                     } else {
                         die('qq terible vien de se passer');
                     }

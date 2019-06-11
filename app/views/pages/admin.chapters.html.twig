@@ -8,15 +8,12 @@
 {% endblock %}
 
 {% block principal %}
-{#    <div class="row">#}
-{#        {{ chapter_message }}#}
-{#    </div>#}
-
-
-    {#    <div class="alert alert-success" id="msg-flash">Nouveau chapitre ajoute avec success</div>#}
+    {{ chapter_message }}
     <div class="row">
         <div class="col-md-6">
+
             <h2>Chapitres</h2>
+
         </div>
         <div class="col-md-6 ">
             <div class="btn-group btn-group-sm float-right" role="group" aria-label="...">
@@ -33,7 +30,7 @@
             <li class="breadcrumb-item active" aria-current="page">Chapters</li>
         </ol>
     </nav>
-
+    {{ chapter_message }}
     <table class="table table-responsive-md table-hover">
         <thead>
         <tr>
@@ -46,7 +43,7 @@
         <tbody>
         {% for chapter in chapters %}
             <tr>
-{{ dump(chapter) }}
+
                 <th scope="row">{{ loop.index }}</th>
                 <td><a href="">{{ chapter.title }}</a></td>
                 <td><a href="">approuve</a></td>
