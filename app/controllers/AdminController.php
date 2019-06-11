@@ -52,6 +52,13 @@ class AdminController extends Controller
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 //Sanitize the post
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                $chapter_message = flash('chapter_message');
+                $message_chapter = <<<EOD
+                    <div class="alert alert-success" id="msg-flash" role="alert">Nouveau chapitre ajoute avec success</div>
+EOD;
+
+//                var_dump($message_chapter);
+
 
                 $data = [
                     'title' => trim($_POST['title']),
@@ -59,6 +66,7 @@ class AdminController extends Controller
                     'admin_id' => $_SESSION['admin_id'],
                     'title_err' => '',
                     'content_err' => '',
+                    'chapter_message' => $message_chapter
                 ];
 
                 //Validate data
@@ -73,9 +81,10 @@ class AdminController extends Controller
                 if (empty($data['title_err']) && empty($data['content_err'])) {
                     //validated
                     if ($this->chapterModel->addChapter($data)) {
+                        flash('chapter_message', 'Nouveau chapitre ajoute avec success');
                         header('Location: index.php?action=adminChapters');
                     } else {
-                        die('qq deterible ');
+                        die('qq terible vien de se passer');
                     }
 
                 } else {
