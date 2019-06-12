@@ -33,18 +33,13 @@ class AdminController extends Controller
             $message_chapter = <<<EOD
                     $chapter_message
 EOD;
-            $chapter = null;
-            if (isset($_GET['id'])) {
-                $chapter = $this->chapterModel->getChaptersById($_GET['id']);
-            }
-
 
             $data = [
                 'title' => "Admin Chapters",
                 'chapters' => $chapters,
                 'ben' => 'Beniamin Tolan',
                 'chapter_message' => $message_chapter,
-                'chapter' => $chapter
+
             ];
             global $twig;
             $vue = $twig->load('admin.chapters.html.twig');
@@ -145,6 +140,7 @@ EOD;
                     //validated
                     if ($this->chapterModel->updateChapter($data)) {
                         header('Location: index.php?action=adminChapters');
+//                        sleep(2);
                         flash('chapter_message', 'Le chapitre a ete modifiee avec success');
                     } else {
                         die('qq terible vien de se passer');
@@ -182,8 +178,8 @@ EOD;
             $id = $_GET['id'];
 
             if ($this->chapterModel->deleteChapter($id)) {
-                flash('chapter_message', 'Le chapitre a ete dupprime');
                 header('Location: index.php?action=adminChapters');
+                flash('chapter_message', 'Le chapitre a ete dupprime');
             } else {
                 die('Qq du mal se passe');
             }
