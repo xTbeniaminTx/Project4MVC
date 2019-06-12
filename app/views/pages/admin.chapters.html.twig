@@ -15,11 +15,10 @@
             <h2>Chapitres</h2>
 
         </div>
-        <div class="col-md-6 ">
+        <div class="col-md-6">
             <div class="btn-group btn-group-sm float-right" role="group" aria-label="...">
-                <a href="index.php?action=addChapter" class="btn btn-success">
-                    <i class="fas fa-pencil-alt"></i>
-                    Nouveau</a>
+                <a href="index.php?action=addChapter" class="btn btn-success mr-2">
+                    <i class="fas fa-pencil-alt"></i>Nouveau</a>
             </div>
         </div>
     </div>
@@ -30,29 +29,38 @@
             <li class="breadcrumb-item active" aria-current="page">Chapters</li>
         </ol>
     </nav>
+
     <table class="table table-responsive-md table-hover">
         <thead>
         <tr>
-{#            <th scope="col">#</th>#}
-            <th scope="col">Chapitre</th>
-            <th scope="col"><i class="fa fa-edit" aria-hidden="true"></i></th>
-            <th scope="col"><i class="fa fa-trash" aria-hidden="true"></i></th>
+
+            <th scope="col" colspan="2">Chapitre</th>
+            <th scope="col" class="text-warning"></th>
+
         </tr>
         </thead>
-        <tbody>
+
         {{ dump() }}
         {% for chapter in chapters %}
+        <tbody>
             <tr>
 
-{#                <th scope="row">{{ loop.index }}</th>#}
-                <td><a href="">{{ chapter.title |raw }}</a></td>
-                <td><a href="index.php?action=editChapter&id={{ chapter.id }}">Modifier</a></td>
-                <td><a href="index.php?action=deleteChapter&id={{ chapter.id }}">Effacer</a></td>
+                <td colspan="2"><a href="index.php?action=showChapter&id={{ chapter.id }}">{{ chapter.title |raw }}</a></td>
+                <td>
+                    <div class="btn-group btn-group-sm float-right" role="group" aria-label="...">
+                        <a href="index.php?action=editChapter&id={{ chapter.id }}" class="btn btn-warning">
+                            <i class="fa fa-edit"></i>Modifier</a>
+                        <a href="index.php?action=deleteChapter&id={{ chapter.id }}" class="btn btn-danger">
+                            <i class="fa fa-trash"></i>Effacer</a>
+                    </div>
+                </td>
+
 
             </tr>
+        </tbody>
         {% endfor %}
 
-        </tbody>
+
     </table>
 
 
