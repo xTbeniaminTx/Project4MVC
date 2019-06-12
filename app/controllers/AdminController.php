@@ -175,6 +175,23 @@ EOD;
 
     }
 
+    public function deleteChapter()
+    {
+        if ($this->isLoggedIn()) {
+
+            $id = $_GET['id'];
+
+            if ($this->chapterModel->deleteChapter($id)) {
+                flash('chapter_message', 'Le chapitre a ete dupprime');
+                header('Location: index.php?action=adminChapters');
+            } else {
+                die('Qq du mal se passe');
+            }
+
+        } else {
+            header('Location: index.php?action=adminLogin');
+        }
+    }
 
     public function adminComments()
     {
