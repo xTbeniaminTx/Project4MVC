@@ -33,13 +33,14 @@ class AdminController extends Controller
             $message_chapter = <<<EOD
                     $chapter_message
 EOD;
-
+            $chapter = $this->chapterModel->getChaptersById($_GET['id']);
 
             $data = [
                 'title' => "Admin Chapters",
                 'chapters' => $chapters,
                 'ben' => 'Beniamin Tolan',
-                'chapter_message' => $message_chapter
+                'chapter_message' => $message_chapter,
+                'chapter' => $chapter
             ];
             global $twig;
             $vue = $twig->load('admin.chapters.html.twig');
@@ -50,7 +51,7 @@ EOD;
 
     }
 
-    public function addChapters()
+    public function addChapter()
     {
         if ($this->isLoggedIn()) {
 
@@ -93,7 +94,7 @@ EOD;
                 } else {
                     //load view with errors
                     global $twig;
-                    $vue = $twig->load('admin.add.chapters.html.twig');
+                    $vue = $twig->load('admin.edit.chapters.html.twig');
                     echo $vue->render($data);
                 }
             } else {
@@ -102,7 +103,7 @@ EOD;
                     'content' => '',
                 ];
                 global $twig;
-                $vue = $twig->load('admin.add.chapters.html.twig');
+                $vue = $twig->load('admin.edit.chapters.html.twig');
                 echo $vue->render($data);
             }
 
@@ -112,17 +113,20 @@ EOD;
         }
     }
 
-//    public function showChapter($id)
-//    {
-//        $data = [
-//            'title' => '',
-//            'content' => '',
-//        ];
-//        global $twig;
-//        $vue = $twig->load('admin.add.chapters.html.twig');
-//        echo $vue->render($data);
-//
-//    }
+    public function editChapter()
+    {
+        $chapter = $this->chapterModel->getChaptersById($_GET['id']);
+        $data = [
+            'title' => $chapter->title,
+            'content' => $chapter->content,
+            'id' => $chapter->id,
+            'chapter' => $chapter
+        ];
+        global $twig;
+        $vue = $twig->load('admin.edit.chapters.html.twig');
+        echo $vue->render($data);
+
+    }
 
 
     public function adminComments()

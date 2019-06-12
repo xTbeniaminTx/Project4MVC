@@ -17,7 +17,7 @@
         </div>
         <div class="col-md-6 ">
             <div class="btn-group btn-group-sm float-right" role="group" aria-label="...">
-                <a href="index.php?action=addChapters" class="btn btn-success">
+                <a href="index.php?action=addChapter" class="btn btn-success">
                     <i class="fas fa-pencil-alt"></i>
                     Nouveau</a>
             </div>
@@ -45,8 +45,8 @@
 
 {#                <th scope="row">{{ loop.index }}</th>#}
                 <td><a href="">{{ chapter.title |raw }}</a></td>
-                <td><a href="">approuve</a></td>
-                <td><a href="">desapprouve</a></td>
+                <td><a href="index.php?action=editChapter&id={{ chapter.id }}">Modifier</a></td>
+                <td><a href="index.php?action=deleteChapter&id={{ chapter.id }}">Effacer</a></td>
 
             </tr>
         {% endfor %}
