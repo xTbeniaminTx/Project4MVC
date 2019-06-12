@@ -33,7 +33,11 @@ class AdminController extends Controller
             $message_chapter = <<<EOD
                     $chapter_message
 EOD;
-            $chapter = $this->chapterModel->getChaptersById($_GET['id']);
+            $chapter = null;
+            if (isset($_GET['id'])) {
+                $chapter = $this->chapterModel->getChaptersById($_GET['id']);
+            }
+
 
             $data = [
                 'title' => "Admin Chapters",
@@ -59,11 +63,6 @@ EOD;
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 //Sanitize the post
                 $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-                $chapter_message = flash('chapter_message');
-                $message_chapter = <<<EOD
-                    <div class="alert alert-success" id="msg-flash" role="alert">Nouveau chapitre ajoute avec success</div>
-EOD;
-
 
                 $data = [
                     'title' => trim($_POST['title']),
@@ -115,16 +114,64 @@ EOD;
 
     public function editChapter()
     {
-        $chapter = $this->chapterModel->getChaptersById($_GET['id']);
-        $data = [
-            'title' => $chapter->title,
-            'content' => $chapter->content,
-            'id' => $chapter->id,
-            'chapter' => $chapter
-        ];
-        global $twig;
-        $vue = $twig->load('admin.edit.chapters.html.twig');
-        echo $vue->render($data);
+        if ($this->isLoggedIn()) {
+
+
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                //Sanitize the post
+                $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+                if (isset($_GET['id'])) {
+                    $chapter = $this->chapterModel->getChaptersById($_GET['id']);
+                }
+                $data = [
+                    'title' => trim($_POST['title']),
+                    'content' => trim($_POST['content']),
+                    'admin_id' => $_SESSION['admin_id'],
+                    'id' => $chapter->id,
+                    'title_err' => '',
+                    'content_err' => '',
+                ];
+
+                //Validate data
+                if (empty($data['title'])) {
+                    $data['title_err'] = 'Veuillez entre un titre';
+                }
+                if (empty($data['content'])) {
+                    $data['content_err'] = 'Veuillez entre un contenu pour votre chapitre';
+                }
+
+                //make sure errors are empty
+                if (empty($data['title_err']) && empty($data['content_err'])) {
+                    //validated
+                    if ($this->chapterModel->updateChapter($data)) {
+                        header('Location: index.php?action=adminChapters');
+                        flash('chapter_message', 'Le chapitre a ete modifiee avec success');
+                    } else {
+                        die('qq terible vien de se passer');
+                    }
+
+                } else {
+                    //load view with errors
+                    global $twig;
+                    $vue = $twig->load('admin.edit.chapters.html.twig');
+                    echo $vue->render($data);
+                }
+            } else {
+                $chapter = $this->chapterModel->getChaptersById($_GET['id']);
+                $data = [
+                    'title' => $chapter->title,
+                    'content' => $chapter->content,
+                    'id' => $chapter->id,
+                    'chapter' => $chapter
+                ];
+                global $twig;
+                $vue = $twig->load('admin.edit.chapters.html.twig');
+                echo $vue->render($data);
+            }
+
+        } else {
+            header('Location: index.php?action=adminLogin');
+        }
 
     }
 

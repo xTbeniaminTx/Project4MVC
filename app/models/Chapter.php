@@ -34,6 +34,20 @@ class Chapter
             return false;
         }
     }
+    public function updateChapter($data)
+    {
+        $this->db->query('UPDATE chapters SET title = :title, content = :content WHERE id=:id');
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':title', $data['title']);
+        $this->db->bind(':content', $data['content']);
+
+        //execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function getChaptersById($id) {
         $this->db->query('SELECT * FROM chapters WHERE id = :id');
