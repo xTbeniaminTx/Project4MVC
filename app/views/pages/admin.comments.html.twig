@@ -29,43 +29,39 @@
      <table class="table table-responsive-md table-hover">
          <thead>
          <tr>
-             <th scope="col"><input type="checkbox"></th>
-             <th scope="col">#</th>
-             <th scope="col">Commentaire</th>
+
              <th scope="col">Author</th>
+             <th scope="col">Comentaire</th>
              <th scope="col">Email</th>
-             <th scope="col">Approuved/Unapprouved</th>
+             <th scope="col">Status</th>
+             <th scope="col">In Response TO</th>
+             <th scope="col">Date</th>
+             <th scope="col" class="text-warning">Appe/Unapp/Del</th>
 
          </tr>
          </thead>
-         <tbody>
-         <tr>
-             <td scope="row"><input type="checkbox"></td>
-             <th scope="row">1</th>
-             <td><a href="">Mark</a></td>
-             <td>Otto</td>
-             <td>@mdo</td>
-             <td>@mdo</td>
 
-         </tr>
-         <tr>
-             <td scope="row"><input type="checkbox"></td>
-             <th scope="row">2</th>
-             <td>Jacob</td>
-             <td>Thornton</td>
-             <td>@fat</td>
-             <td>@fat</td>
+         {{ dump() }}
+         {% for chapter in chapters %}
+             <tbody>
+             <tr>
 
-         </tr>
-         <tr>
-             <td scope="row"><input type="checkbox"></td>
-             <th scope="row">3</th>
-             <td colspan="2">Larry the Bird</td>
-             <td>@twitter</td>
-             <td>@twitter</td>
+                 <td colspan="2"><a href="index.php?action=showChapter&id={{ chapter.id }}">{{ chapter.title |raw }}</a></td>
+                 <td>
+                     <div class="btn-group btn-group-sm float-right" role="group" aria-label="...">
+                         <a href="index.php?action=editChapter&id={{ chapter.id }}" class="btn btn-warning">
+                             <i class="fa fa-edit"></i>Modifier</a>
+                         <a href="index.php?action=deleteChapter&id={{ chapter.id }}" class="btn btn-danger">
+                             <i class="fa fa-trash"></i>Effacer</a>
+                     </div>
+                 </td>
 
-         </tr>
-         </tbody>
+
+             </tr>
+             </tbody>
+         {% endfor %}
+
+
      </table>
 
      <nav aria-label="Page navigation example">

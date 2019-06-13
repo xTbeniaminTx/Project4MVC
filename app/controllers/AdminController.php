@@ -8,6 +8,7 @@ class AdminController extends Controller
     {
         $this->loginModel = $this->model('Login');
         $this->chapterModel = $this->model('Chapter');
+        $this->commentModel = $this->model('Comment');
     }
 
     public function adminView()
@@ -43,6 +44,31 @@ EOD;
             ];
             global $twig;
             $vue = $twig->load('admin.chapters.html.twig');
+            echo $vue->render($data);
+        } else {
+            header('Location: index.php?action=adminLogin');
+        }
+
+    }
+
+    public function adminComments()
+    {
+        if ($this->isLoggedIn()) {
+            $comments = $this->commentModel->getComments();
+            $comment_message = flash('comment_message');
+            $message_comment = <<<EOD
+                    $comment_message
+EOD;
+
+            $data = [
+                'title' => "Admin Chapters",
+                'comments' => $comments,
+                'ben' => 'Beniamin Tolan',
+                'comment_message' => $message_comment,
+
+            ];
+            global $twig;
+            $vue = $twig->load('admin.comments.html.twig');
             echo $vue->render($data);
         } else {
             header('Location: index.php?action=adminLogin');
@@ -188,21 +214,6 @@ EOD;
             header('Location: index.php?action=adminLogin');
         }
     }
-
-    public function adminComments()
-    {
-        if ($this->isLoggedIn()) {
-            global $twig;
-            $vue = $twig->load('admin.comments.html.twig');
-            echo $vue->render([
-                'title' => "Admin Comments",
-                'ben' => 'Beniamin Tolan'
-            ]);
-        } else {
-            header('Location: index.php?action=adminLogin');
-        }
-    }
-
 
     public function adminLogin()
     {

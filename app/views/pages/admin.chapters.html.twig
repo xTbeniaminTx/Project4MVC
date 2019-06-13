@@ -42,7 +42,7 @@
 
         {{ dump() }}
         {% for chapter in chapters %}
-        <tbody>
+            <tbody>
             <tr>
 
                 <td colspan="2"><a href="index.php?action=showChapter&id={{ chapter.id }}">{{ chapter.title |raw }}</a></td>
@@ -57,7 +57,7 @@
 
 
             </tr>
-        </tbody>
+            </tbody>
         {% endfor %}
 
 

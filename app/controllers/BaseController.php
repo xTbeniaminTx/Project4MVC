@@ -7,6 +7,7 @@ class BaseController extends Controller
     public function __construct()
     {
         $this->chapterModel = $this->model('Chapter');
+        $this->commentModel = $this->model('Comment');
     }
 
 
@@ -56,16 +57,22 @@ class BaseController extends Controller
     public function showChapter()
     {
         $chapters = $this->chapterModel->getChaptersById($_GET['id']);
+        $comments = $this->commentModel->getComments();
+        $photoId = rand(10, 50);
 
         $data = [
             'chapters' => $chapters,
-            'id' => $_GET['id'] + rand(10, 50)
+            'comments' => $comments,
+            'id' => $_GET['id'] + rand(10, 50),
+            'photoId' => $photoId
         ];
         global $twig;
         $vue = $twig->load('chapter.html.twig');
         echo $vue->render($data);
 
     }
+
+
 
     public function bio()
     {
