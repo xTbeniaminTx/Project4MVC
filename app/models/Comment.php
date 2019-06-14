@@ -22,10 +22,9 @@ class Comment
     public function addComment($data)
     {
         $this->db->query('INSERT INTO 
-comments (comment_id, comment_chapter_id, comment_author, comment_email, comment_content,comment_status, comment_date)
+comments (comment_chapter_id, comment_author, comment_email, comment_content,comment_status, comment_date)
                               VALUES
-(:comment_id, :comment_chapter_id, :comment_author, :comment_email, :comment_content, :comment_status, :comment_date)');
-        $this->db->bind(':comment_id', $data['comment_id']);
+(:comment_chapter_id, :comment_author, :comment_email, :comment_content, :comment_status, :comment_date)');
         $this->db->bind(':comment_chapter_id', $data['comment_chapter_id']);
         $this->db->bind(':comment_author', $data['comment_author']);
         $this->db->bind(':comment_email', $data['comment_email']);
@@ -56,9 +55,9 @@ comments (comment_id, comment_chapter_id, comment_author, comment_email, comment
         }
     }
 
-    public function getChaptersById($id)
+    public function getCommentById($id)
     {
-        $this->db->query('SELECT * FROM chapters WHERE id = :id');
+        $this->db->query('SELECT * FROM comments WHERE comment_chapter_id = :id');
         $this->db->bind(':id', $id);
 
         $row = $this->db->single();
