@@ -56,31 +56,14 @@ class BaseController extends Controller
 
     public function showChapter()
     {
-        $chapters = $this->chapterModel->getChaptersById($_GET['id']);
-        $comments = $this->commentModel->getComments();
-        $photoId = rand(10, 50);
-
-        $data = [
-            'chapters' => $chapters,
-            'comments' => $comments,
-            'id' => 10 + rand(10, 50),
-            'photoId' => $photoId
-        ];
-        global $twig;
-        $vue = $twig->load('chapter.html.twig');
-        echo $vue->render($data);
-
-    }
-
-    public function addComment()
-    {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
             //Sanitize the post
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-
+            $chapters = $this->chapterModel->getChaptersById($_GET['id']);
             $comments = $this->commentModel->getComments();
             $comment = $this->commentModel->getCommentById($_GET['id']);
-            $id = $comment->comment_chapter_id;
+            $id = $chapters->id;
 
             $data = [
                 'comment_author' => trim($_POST['comment_author']),
@@ -92,6 +75,8 @@ class BaseController extends Controller
                 'comment_author_err' => '',
                 'comment_email_err' => '',
                 'comment_content_err' => '',
+                'chapters' => $chapters,
+                'comments' => $comments
             ];
 
             //Validate data
@@ -109,7 +94,8 @@ class BaseController extends Controller
             if (empty($data['comment_author_err']) && empty($data['comment_email_err']) && empty($data['comment_content_err'])) {
                 //validated
                 if ($this->commentModel->addComment($data)) {
-                    header('Location: index.php?action=showChapter&id='.$data['comment_chapter_id']);
+
+                    header('Location: index.php?action=showChapter&id='.$_GET['id']);
                     flash('comment_message', 'Nouveau commentaire ajoute avec success');
                 } else {
                     die('qq terible vien de se passer');
@@ -122,14 +108,20 @@ class BaseController extends Controller
                 echo $vue->render($data);
             }
         } else {
+            $chapter = $this->chapterModel->getChaptersById($_GET['id']);
+            $comments = $this->commentModel->getComments();
+            $photoId = rand(10, 50);
+
             $data = [
-                'comment_author' => '',
-                'comment_email' => '',
-                'comment_content' => '',
+                'chapter' => $chapter,
+                'comments' => $comments,
+                'id' => 10 + rand(10, 50),
+                'photoId' => $photoId
             ];
             global $twig;
             $vue = $twig->load('chapter.html.twig');
             echo $vue->render($data);
+
         }
     }
 

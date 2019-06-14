@@ -33,7 +33,7 @@
                     <!-- Blog Post -->
 
                     <!-- Title -->
-                    <h1>{{ chapters.title |raw }}</h1>
+                    <h1>{{ chapter.title |raw }}</h1>
 
                     <!-- Author -->
                     <p class="lead">
@@ -43,34 +43,39 @@
                     <hr>
 
                     <!-- Date/Time -->
-                    <p> Publie le {{ chapters.content_date | date('d/m/Y') }}</p>
+                    <p> Publie le {{ chapter.content_date | date('d/m/Y') }}</p>
 
                     <hr>
 
                     <!-- Preview Image -->
-                    {{ dump(chapters) }}
+                    {{ dump(chapter) }}
                     <img class="img-fluid" src="https://picsum.photos/id/{{ id }}/900/300" alt="">
 
                     <hr>
 
                     <!-- Post Content -->
 {#                    class="lead"#}
-                    <p class="lead">{{ chapters.content |raw }}</p>
+                    <p class="lead">{{ chapter.content |raw }}</p>
 
                     <hr>
+
+
+
 
                     <!-- Blog Comments -->
 
                     <!-- Comments Form -->
                     <div class="well">
-                        {{ dump(comments) }}
+                        {{ dump() }}
                         <h4>Laissez nou un commentaire:</h4>
-                        <form action="index.php?action=addComment" method="POST">
+                        <form action="index.php?action=showChapter&id={{ chapter.id }}" method="POST">
 
                             <div class="form-group">
                                 <label for="comment_author">Author</label>
-                                <input type="text" class="form-control" name="comment_author">
+                                <input type="text" class="form-control {{ (comment_author_err is not empty) ? 'is-invalid' : '' }}"
+                                       name="comment_author" value="{{ comment.author }}">
                             </div>
+                            <span class="invalid-feedback">{{ comment_author_err }}</span>
 
                             <div class="form-group">
                                 <label for="comment_email">Email</label>
