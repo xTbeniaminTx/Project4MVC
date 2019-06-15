@@ -26,3 +26,9 @@ $twig = new \Twig\Environment($loader, [
 ]);
 //https://github.com/nlemoine/twig-dump-extension
 $twig->addExtension(new \HelloNico\Twig\DumpExtension());
+
+/*
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+git config --global alias.st "status"
+git config --global alias.co "checkout"
+*/
