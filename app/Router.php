@@ -8,9 +8,9 @@ require_once 'config/config.php';
 require_once 'helpers/session_helper.php';
 
 require_once('libraries/Database.php');
-include_once('controllers/Controller.php');
-include_once('controllers/BaseController.php');
-include_once('controllers/AdminController.php');
+require_once('controllers/Controller.php');
+require_once('controllers/BaseController.php');
+require_once('controllers/AdminController.php');
 
 class Router
 {

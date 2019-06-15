@@ -54,12 +54,10 @@
                     <hr>
 
                     <!-- Post Content -->
-{#                    class="lead"#}
+                    {#                    class="lead"#}
                     <p class="lead">{{ chapter.content |raw }}</p>
 
                     <hr>
-
-
 
 
                     <!-- Blog Comments -->
@@ -70,16 +68,21 @@
                         <h4>Laissez nou un commentaire:</h4>
                         <form action="index.php?action=showChapter&id={{ chapter.id }}" method="POST">
 
-                            <div class="form-group">
-                                <label for="comment_author">Author</label>
-                                <input type="text" class="form-control {{ (comment_author_err is not empty) ? 'is-invalid' : '' }}"
-                                       name="comment_author" value="{{ comment.author }}">
+                            <div class="form-group row">
+                                <label for="comment_author" class="col-sm-2">Author</label>
+                                <div class="col-sm-10">
+                                    <input type="text"
+                                           class="form-control {{ (comment_author_err is not empty) ? 'is-invalid' : '' }}"
+                                           name="comment_author" value="{{ comment.author }}">
+                                </div>
                             </div>
                             <span class="invalid-feedback">{{ comment_author_err }}</span>
 
-                            <div class="form-group">
-                                <label for="comment_email">Email</label>
-                                <input type="email" class="form-control" name="comment_email">
+                            <div class="form-group row">
+                                <label for="comment_email" class="col-sm-2">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" name="comment_email">
+                                </div>
                             </div>
 
                             <div class="form-group">
