@@ -34,7 +34,7 @@
              <th scope="col">Comentaire</th>
              <th scope="col">Email</th>
              <th scope="col">Status</th>
-             <th scope="col">In Response TO</th>
+             <th scope="col">En Reponse A</th>
              <th scope="col">Date</th>
              <th scope="col" class="text-warning">Appe/Unapp/Del</th>
 
@@ -46,11 +46,11 @@
              <tbody>
              <tr>
 
-                 <td><a href="index.php?action=showChapter&id={{ comment.comment_id }}">{{ comment.comment_author }}</a></td>
+                 <td><a href="index.php?action=showChapter&id={{ comment.comment_chapter_id }}">{{ comment.comment_author }}</a></td>
                  <td>{{ comment.comment_content }}</td>
                  <td>{{ comment.comment_email }}</td>
                  <td>{{ comment.comment_status }}</td>
-                 <td>{{ 'Some title' }}</td>
+                 <td><a href="index.php?action=showChapter&id={{ comment.comment_chapter_id }}">{{ comment.title }}</a></td>
                  <td>{{ comment.comment_date }}</td>
                  <td>
                      <div class="btn-group btn-group-sm float-right" role="group" aria-label="...">

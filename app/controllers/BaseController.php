@@ -56,25 +56,23 @@ class BaseController extends Controller
 
     public function showChapter()
     {
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             //Sanitize the post
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
             $chapters = $this->chapterModel->getChaptersById($_GET['id']);
             $comments = $this->commentModel->getComments();
-            $comment = $this->commentModel->getCommentById($_GET['id']);
-            $id = $chapters->id;
 
             $data = [
                 'comment_author' => trim($_POST['comment_author']),
                 'comment_email' => trim($_POST['comment_email']),
                 'comment_content' => trim($_POST['comment_content']),
-                'comment_chapter_id' => $id,
                 'comment_date' => date('Y-m-d'),
                 'comment_status' => 'unapprouved',
-                'comment_author_err' => '',
-                'comment_email_err' => '',
-                'comment_content_err' => '',
+                'comment_author_err' => null,
+                'comment_email_err' => null,
+                'comment_content_err' => null,
                 'chapters' => $chapters,
                 'comments' => $comments
             ];
@@ -93,7 +91,7 @@ class BaseController extends Controller
             //make sure errors are empty
             if (empty($data['comment_author_err']) && empty($data['comment_email_err']) && empty($data['comment_content_err'])) {
                 //validated
-                if (!$this->commentModel->addComment($data)) {
+                if ($this->commentModel->addComment($data)) {
 
                     header('Location: index.php?action=showChapter&id='.$_GET['id']);
                     flash('comment_message', 'Nouveau commentaire ajoute avec success');
@@ -116,12 +114,17 @@ class BaseController extends Controller
                 'chapter' => $chapter,
                 'comments' => $comments,
                 'id' => 10 + rand(10, 50),
-                'photoId' => $photoId
+                'photoId' => $photoId,
+                'comment_date' => date('Y-m-d'),
+                'comment_status' => 'unapprouved',
+                'comment_author_err' => null,
+                'comment_email_err' => null,
+                'comment_content_err' => null,
+
             ];
             global $twig;
             $vue = $twig->load('chapter.html.twig');
             echo $vue->render($data);
-
         }
     }
 

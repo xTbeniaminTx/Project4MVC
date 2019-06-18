@@ -61,6 +61,7 @@ class Chapter
 
     }
 
+
     public function deleteChapter($id)
     {
         $this->db->query('DELETE FROM chapters WHERE id = :id');

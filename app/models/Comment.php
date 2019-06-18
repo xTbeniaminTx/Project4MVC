@@ -11,13 +11,22 @@ class Comment
 
     public function getComments()
     {
-        $this->db->query("SELECT * FROM comments ORDER BY comment_id DESC");
+        $this->db->query("SELECT *,
+                                comments.comment_id as commentId,
+                                chapters.id as chapterId
+                              FROM comments
+                              INNER JOIN chapters
+                              ON comments.comment_chapter_id = chapters.id
+                              ORDER BY chapters.content_date DESC
+                              ");
 
         $results = $this->db->resultSet();
 
         return $results;
 
     }
+
+
 
     public function addComment($data)
     {
@@ -40,7 +49,7 @@ comments (comment_chapter_id, comment_author, comment_email, comment_content,com
         }
     }
 
-    public function updateChapter($data)
+    public function updateCommentStatus($data)
     {
         $this->db->query('UPDATE chapters SET title = :title, content = :content WHERE id=:id');
         $this->db->bind(':id', $data['id']);
@@ -55,18 +64,8 @@ comments (comment_chapter_id, comment_author, comment_email, comment_content,com
         }
     }
 
-    public function getCommentById($id)
-    {
-        $this->db->query('SELECT * FROM comments WHERE comment_chapter_id = :id');
-        $this->db->bind(':id', $id);
 
-        $row = $this->db->single();
-
-        return $row;
-
-    }
-
-    public function deleteChapter($id)
+    public function deleteComment($id)
     {
         $this->db->query('DELETE FROM chapters WHERE id = :id');
         $this->db->bind(':id', $id);

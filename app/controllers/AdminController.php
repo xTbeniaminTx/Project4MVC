@@ -54,17 +54,25 @@ EOD;
     public function adminComments()
     {
         if ($this->isLoggedIn()) {
+            $chapters = $this->chapterModel->getChapters();
+            foreach ($chapters as $chapter) {
+                $id = $chapter->id;
+            }
             $comments = $this->commentModel->getComments();
+            $chapterModel = $this->chapterModel;
+
             $comment_message = flash('comment_message');
             $message_comment = <<<EOD
                     $comment_message
 EOD;
 
             $data = [
-                'title' => "Admin Chapters",
+                'chapterId' => $id,
                 'comments' => $comments,
+                'chapters' => $chapters,
                 'ben' => 'Beniamin Tolan',
                 'comment_message' => $message_comment,
+                'chapterModel' => $chapterModel
 
             ];
             global $twig;
