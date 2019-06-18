@@ -70,8 +70,8 @@ class BaseController extends Controller
                 'comment_email' => trim($_POST['comment_email']),
                 'comment_content' => trim($_POST['comment_content']),
                 'comment_chapter_id' => $id,
-                'comment_date' => time(),
-                'comment_status' => 'approuved',
+                'comment_date' => date('Y-m-d'),
+                'comment_status' => 'unapprouved',
                 'comment_author_err' => '',
                 'comment_email_err' => '',
                 'comment_content_err' => '',
@@ -93,7 +93,7 @@ class BaseController extends Controller
             //make sure errors are empty
             if (empty($data['comment_author_err']) && empty($data['comment_email_err']) && empty($data['comment_content_err'])) {
                 //validated
-                if ($this->commentModel->addComment($data)) {
+                if (!$this->commentModel->addComment($data)) {
 
                     header('Location: index.php?action=showChapter&id='.$_GET['id']);
                     flash('comment_message', 'Nouveau commentaire ajoute avec success');
