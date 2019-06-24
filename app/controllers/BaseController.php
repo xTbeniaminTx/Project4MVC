@@ -61,8 +61,11 @@ class BaseController extends Controller
 
             //Sanitize the post
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-            $chapters = $this->chapterModel->getChaptersById($_GET['id']);
+            if (isset($_GET['id'])) {
+                $chapter = $this->chapterModel->getChaptersById($_GET['id']);
+            }
             $comments = $this->commentModel->getComments();
+            $commentsById = $this->commentModel->getCommentsById($_GET['id']);
 
             $data = [
                 'comment_author' => trim($_POST['comment_author']),
@@ -73,8 +76,10 @@ class BaseController extends Controller
                 'comment_author_err' => null,
                 'comment_email_err' => null,
                 'comment_content_err' => null,
-                'chapters' => $chapters,
-                'comments' => $comments
+                'chapter' => $chapter,
+                'comment_chapter_id' => $chapter->id,
+                'comments' => $comments,
+                'commentsById' => $commentsById,
             ];
 
             //Validate data
@@ -92,8 +97,8 @@ class BaseController extends Controller
             if (empty($data['comment_author_err']) && empty($data['comment_email_err']) && empty($data['comment_content_err'])) {
                 //validated
                 if ($this->commentModel->addComment($data)) {
-
-                    header('Location: index.php?action=showChapter&id='.$_GET['id']);
+//var_dump($data);die;
+                    header('Location: index.php?action=showChapter&id=' . $_GET['id']);
                     flash('comment_message', 'Nouveau commentaire ajoute avec success');
                 } else {
                     die('qq terible vien de se passer');
@@ -108,6 +113,7 @@ class BaseController extends Controller
         } else {
             $chapter = $this->chapterModel->getChaptersById($_GET['id']);
             $comments = $this->commentModel->getComments();
+            $commentsById = $this->commentModel->getCommentsById($_GET['id']);
             $photoId = rand(10, 50);
 
             $data = [
@@ -115,11 +121,12 @@ class BaseController extends Controller
                 'comments' => $comments,
                 'id' => 10 + rand(10, 50),
                 'photoId' => $photoId,
-                'comment_date' => date('Y-m-d'),
-                'comment_status' => 'unapprouved',
-                'comment_author_err' => null,
-                'comment_email_err' => null,
-                'comment_content_err' => null,
+                'commentsById' => $commentsById,
+//                'comment_date' => date('Y-m-d'),
+//                'comment_status' => 'unapprouved',
+//                'comment_author_err' => null,
+//                'comment_email_err' => null,
+//                'comment_content_err' => null,
 
             ];
             global $twig;

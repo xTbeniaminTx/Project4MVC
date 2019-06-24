@@ -17,9 +17,27 @@ class Comment
                               FROM comments
                               INNER JOIN chapters
                               ON comments.comment_chapter_id = chapters.id
-                              ORDER BY chapters.content_date DESC
+                              ORDER BY commentId DESC
                               ");
 
+        $results = $this->db->resultSet();
+
+        return $results;
+
+    }
+
+    public function getCommentsById($id)
+    {
+        $this->db->query("SELECT *,
+                                comments.comment_id as commentId,
+                                chapters.id as chapterId
+                              FROM comments
+                              INNER JOIN chapters
+                              ON comments.comment_chapter_id = chapters.id
+                              WHERE comments.comment_chapter_id = :id
+                              ORDER BY commentId DESC
+                              ");
+        $this->db->bind(':id', $id);
         $results = $this->db->resultSet();
 
         return $results;
