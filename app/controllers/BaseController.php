@@ -71,7 +71,7 @@ class BaseController extends Controller
                 'comment_author' => trim($_POST['comment_author']),
                 'comment_email' => trim($_POST['comment_email']),
                 'comment_content' => trim($_POST['comment_content']),
-                'comment_date' => date('Y-m-d'),
+                'comment_date' => date('Y-m-d H:i:s'),
                 'comment_status' => 'unapprouved',
                 'comment_author_err' => null,
                 'comment_email_err' => null,
@@ -122,11 +122,9 @@ class BaseController extends Controller
                 'id' => 10 + rand(10, 50),
                 'photoId' => $photoId,
                 'commentsById' => $commentsById,
-//                'comment_date' => date('Y-m-d'),
+                'comment_date' => date('Y-m-d H:i:s'),
 //                'comment_status' => 'unapprouved',
-//                'comment_author_err' => null,
-//                'comment_email_err' => null,
-//                'comment_content_err' => null,
+
 
             ];
             global $twig;

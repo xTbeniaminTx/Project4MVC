@@ -108,11 +108,11 @@
                     {% for comment in commentsById %}
                     <div class="media py-2">
                         <a class="pull-left" href="#">
-                            <img class="media-object" src="http://placehold.it/64x64" alt="">
+                            <img class="media-object" src="https://picsum.photos/id/{{ comment.comment_id }}/64/64" alt="">
                         </a>
-                        <div class="media-body">
+                        <div class="media-body py-1 px-1">
                             <h4 class="media-heading">{{ comment.comment_author }}
-                                <small>{{ comment.comment_date }}</small>
+                                <small>le {{ comment.comment_date|date("d/m/Y", false) }} à {{ comment.comment_date|date("H:i:s", false)}}</small>
                             </h4>
                             {{ comment.comment_content }}
                         </div>

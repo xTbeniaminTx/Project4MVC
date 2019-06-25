@@ -26,6 +26,7 @@ $twig = new \Twig\Environment($loader, [
 ]);
 //https://github.com/nlemoine/twig-dump-extension
 $twig->addExtension(new \HelloNico\Twig\DumpExtension());
+$twig->getExtension(\Twig\Extension\CoreExtension::class)->setTimezone('Europe/Paris');
 
 /*
 git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
