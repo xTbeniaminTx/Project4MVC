@@ -259,23 +259,7 @@ EOD;
         }
     }
 
-    public function unapprouve()
-    {
-        if ($this->isLoggedIn()) {
 
-            $id = $_GET['id'];
-
-            if ($this->commentModel->unapprouveStatus($id)) {
-                header('Location: index.php?action=adminComments');
-                flash('comment_message', 'Le commentaire a ete desapprouve');
-            } else {
-                die('Qq du mal se passe');
-            }
-
-        } else {
-            header('Location: index.php?action=adminLogin');
-        }
-    }
 
     public function adminLogin()
     {

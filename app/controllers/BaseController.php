@@ -28,15 +28,43 @@ class BaseController extends Controller
 
     public function contact()
     {
-        global $twig;
-        $vue = $twig->load('contact.html.twig');
-        echo $vue->render([
-            'titre' => "salut",
-            'ben' => 'Beniamin Tolan'
-        ]);
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            global $twig;
+            $vue = $twig->load('contact.html.twig');
+            echo $vue->render([
+                'titre' => "salut",
+                'ben' => 'Beniamin Tolan'
+            ]);
+            if (isset($_POST['sendMail'])) {
+                //SWIFTMAILER
+                // Create the Transport
+                $transport = (new Swift_SmtpTransport('smtp.googlemail.com', 465, 'ssl'))
+                    ->setUsername('beniamin777tolan@gmail.com')
+                    ->setPassword('rewopi123456');
+
+                // Create the Mailer using your created Transport
+                $mailer = new Swift_Mailer($transport);
+
+                // Create a message
+                var_dump($_POST);die;
+
+                $message = (new Swift_Message('Wonderful Subject'))
+                    ->setFrom([$_POST['txtEmail'] => $_POST['txtName']])
+                    ->setTo(['beniamin777tolan@gmail.com' => 'John Doe'])
+                    ->setBody($_POST['txtMsg']);
+
+                // Send the message
+                $result = $mailer->send($message);
+
+                return $result;
+            } else {
+                die('error');
+            }
+
+        }
 
     }
-
 
     public function chapters()
     {
@@ -137,6 +165,27 @@ EOD;
             $vue = $twig->load('chapter.html.twig');
             echo $vue->render($data);
         }
+    }
+
+    public function unapprouve()
+    {
+        $id = $_GET['comment_id'];
+        $idChapter = $_GET['id'];
+
+
+        if ($this->commentModel->unapprouveStatus($id)) {
+            if ($this->isLoggedIn()) {
+                header('Location: index.php?action=adminComments');
+                flash('comment_message', 'Le commentaire a ete desapprouve');
+            } else {
+                header('Location: index.php?action=showChapter&id=' . $idChapter);
+                flash('comment_message', 'Le commentaire a ete desapprouve');
+            }
+
+        } else {
+            die('Qq du mal se passe');
+        }
+
     }
 
 

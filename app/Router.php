@@ -17,6 +17,11 @@ class Router
     private $request;
     private $error;
 
+    public function __construct($request)
+    {
+        $this->request = $request;
+    }
+
     private $routes = [
         "" => ["controllers" => 'BaseController', "method" => 'home'],
         "home" => ["controllers" => 'BaseController', "method" => 'home'],
@@ -25,14 +30,14 @@ class Router
         "showChapter" => ["controllers" => 'BaseController', "method" => 'showChapter'],
         "editComment" => ["controllers" => 'BaseController', "method" => 'editComment'],
         "bio" => ["controllers" => 'BaseController', "method" => 'bio'],
+        "unapprouve" => ["controllers" => 'BaseController', "method" => 'unapprouve'],
     ];
 
-
     private $routesAdmin = [
+
         "adminView" => ["controllers" => 'AdminController', "method" => 'adminView'],
         "adminComments" => ["controllers" => 'AdminController', "method" => 'adminComments'],
         "approuve" => ["controllers" => 'AdminController', "method" => 'approuve'],
-        "unapprouve" => ["controllers" => 'AdminController', "method" => 'unapprouve'],
         "adminChapters" => ["controllers" => 'AdminController', "method" => 'adminChapters'],
         "addChapter" => ["controllers" => 'AdminController', "method" => 'addChapter'],
         "editChapter" => ["controllers" => 'AdminController', "method" => 'editChapter'],
@@ -42,10 +47,6 @@ class Router
         "logout" => ["controllers" => 'AdminController', "method" => 'logout'],
     ];
 
-    public function __construct($request)
-    {
-        $this->request = $request;
-    }
 
     public function renderController()
     {
