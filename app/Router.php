@@ -31,6 +31,8 @@ class Router
     private $routesAdmin = [
         "adminView" => ["controllers" => 'AdminController', "method" => 'adminView'],
         "adminComments" => ["controllers" => 'AdminController', "method" => 'adminComments'],
+        "approuve" => ["controllers" => 'AdminController', "method" => 'approuve'],
+        "unapprouve" => ["controllers" => 'AdminController', "method" => 'unapprouve'],
         "adminChapters" => ["controllers" => 'AdminController', "method" => 'adminChapters'],
         "addChapter" => ["controllers" => 'AdminController', "method" => 'addChapter'],
         "editChapter" => ["controllers" => 'AdminController', "method" => 'editChapter'],

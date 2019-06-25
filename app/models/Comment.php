@@ -67,13 +67,22 @@ comments (comment_chapter_id, comment_author, comment_email, comment_content,com
         }
     }
 
-    public function updateCommentStatus($data)
+    public function approuveStatus($id)
     {
-        $this->db->query('UPDATE chapters SET title = :title, content = :content WHERE id=:id');
-        $this->db->bind(':id', $data['id']);
-        $this->db->bind(':title', $data['title']);
-        $this->db->bind(':content', $data['content']);
+        $this->db->query('UPDATE comments SET comment_status = "approuved" WHERE comment_id=:id');
+        $this->db->bind(':id', $id);
+        //execute
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    public function unapprouveStatus($id)
+    {
+        $this->db->query('UPDATE comments SET comment_status = "unapprouved" WHERE comment_id=:id');
+        $this->db->bind(':id', $id);
         //execute
         if ($this->db->execute()) {
             return true;
