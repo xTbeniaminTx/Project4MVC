@@ -2428,8 +2428,6 @@ a.text-jeanforteroche:hover, a.text-jeanforteroche:focus { color: #fdad70 !impor
   .table .thead-dark th { color: inherit; border-color: #dee2e6; } }
 body { font-family: "Raleway", sans-serif; }
 
-.was-validated .form-control:invalid .invalid-feedback, .form-control.is-invalid .invalid-feedback, .was-validated .custom-select:invalid .invalid-feedback, .custom-select.is-invalid .invalid-feedback { display: block !important; }
-
 .mt-10 { margin-top: 5rem; }
 
 #msg-flash { margin-bottom: -5rem !important; }
