@@ -70,7 +70,7 @@ EOD;
                 'chapterId' => $id,
                 'comments' => $comments,
                 'chapters' => $chapters,
-                'ben' => 'Beniamin Tolan',
+                'ben' => 'Beniamin comment',
                 'comment_message' => $message_comment,
                 'chapterModel' => $chapterModel
 
@@ -214,6 +214,24 @@ EOD;
             if ($this->chapterModel->deleteChapter($id)) {
                 header('Location: index.php?action=adminChapters');
                 flash('chapter_message', 'Le chapitre a ete dupprime');
+            } else {
+                die('Qq du mal se passe');
+            }
+
+        } else {
+            header('Location: index.php?action=adminLogin');
+        }
+    }
+
+    public function deleteComment()
+    {
+        if ($this->isLoggedIn()) {
+
+            $id = $_GET['id'];
+
+            if ($this->commentModel->deleteComment($id)) {
+                header('Location: index.php?action=adminComments');
+                flash('comment_message', 'Le commentaire a ete supprime');
             } else {
                 die('Qq du mal se passe');
             }

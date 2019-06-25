@@ -35,6 +35,7 @@ class Router
         "addChapter" => ["controllers" => 'AdminController', "method" => 'addChapter'],
         "editChapter" => ["controllers" => 'AdminController', "method" => 'editChapter'],
         "deleteChapter" => ["controllers" => 'AdminController', "method" => 'deleteChapter'],
+        "deleteComment" => ["controllers" => 'AdminController', "method" => 'deleteComment'],
         "adminLogin" => ["controllers" => 'AdminController', "method" => 'adminLogin'],
         "logout" => ["controllers" => 'AdminController', "method" => 'logout'],
     ];

@@ -15,7 +15,8 @@ body {
 }
 
 #msg-flash {
-  margin-bottom: -5rem !important;
+  //margin-bottom: -5rem !important;
+  z-index: 99;
 }
 
 

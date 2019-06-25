@@ -56,8 +56,13 @@ class BaseController extends Controller
 
     public function showChapter()
     {
+        $comment_message = flash('comment_message');
+        $message_comment = <<<EOD
+                    $comment_message
+EOD;
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
 
             //Sanitize the post
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
@@ -117,6 +122,7 @@ class BaseController extends Controller
             $photoId = rand(10, 50);
 
             $data = [
+                'comment_message' => $message_comment,
                 'chapter' => $chapter,
                 'comments' => $comments,
                 'id' => 10 + rand(10, 50),

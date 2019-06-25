@@ -1,9 +1,12 @@
 ﻿{% extends "admin.base.html.twig" %}
 
 {% block pagesActive %}
-    <a href="index.php?action=adminView" class="list-group-item list-group-item-action"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-    <a href="index.php?action=adminChapters" class="list-group-item list-group-item-action active"><i class="fas fa-book"></i> Chapitres</a>
-    <a href="index.php?action=adminComments" class="list-group-item list-group-item-action"><i class="fas fa-comments"></i> Commentaires</a>
+    <a href="index.php?action=adminView" class="list-group-item list-group-item-action"><i
+                class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="index.php?action=adminChapters" class="list-group-item list-group-item-action active"><i
+                class="fas fa-book"></i> Chapitres</a>
+    <a href="index.php?action=adminComments" class="list-group-item list-group-item-action"><i
+                class="fas fa-comments"></i> Commentaires</a>
 
 {% endblock %}
 
@@ -45,12 +48,14 @@
             <tbody>
             <tr>
 
-                <td colspan="2"><a href="index.php?action=showChapter&id={{ chapter.id }}">{{ chapter.title |raw }}</a></td>
+                <td colspan="2"><a href="index.php?action=showChapter&id={{ chapter.id }}">{{ chapter.title |raw }}</a>
+                </td>
                 <td>
                     <div class="btn-group btn-group-sm float-right" role="group" aria-label="...">
                         <a href="index.php?action=editChapter&id={{ chapter.id }}" class="btn btn-warning">
                             <i class="fa fa-edit"></i>Modifier</a>
-                        <a href="index.php?action=deleteChapter&id={{ chapter.id }}" class="btn btn-danger" onclick="return confirm('Confirmer la suppression ?');">
+                        <a href="index.php?action=deleteChapter&id={{ chapter.id }}" class="btn btn-danger"
+                           onclick="return confirm('Confirmer la suppression ?');">
                             <i class="fa fa-trash"></i>Effacer</a>
                     </div>
                 </td>

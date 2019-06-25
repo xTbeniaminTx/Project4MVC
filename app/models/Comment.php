@@ -85,7 +85,7 @@ comments (comment_chapter_id, comment_author, comment_email, comment_content,com
 
     public function deleteComment($id)
     {
-        $this->db->query('DELETE FROM chapters WHERE id = :id');
+        $this->db->query('DELETE FROM comments WHERE comment_id = :id');
         $this->db->bind(':id', $id);
 
         //execute

@@ -1,11 +1,15 @@
 {% extends "admin.base.html.twig" %}
 {% block pagesActive %}
-    <a href="index.php?action=adminView" class="list-group-item list-group-item-action"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-    <a href="index.php?action=adminChapters" class="list-group-item list-group-item-action"><i class="fas fa-book"></i> Chapitres</a>
-    <a href="index.php?action=adminComments" class="list-group-item list-group-item-action active"><i class="fas fa-comments"></i> Commentaires</a>
+    <a href="index.php?action=adminView" class="list-group-item list-group-item-action"><i
+                class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="index.php?action=adminChapters" class="list-group-item list-group-item-action"><i class="fas fa-book"></i>
+        Chapitres</a>
+    <a href="index.php?action=adminComments" class="list-group-item list-group-item-action active"><i
+                class="fas fa-comments"></i> Commentaires</a>
 
 {% endblock %}
  {% block principal %}
+     {{ comment_message }}
      <div class="row">
          <div class="col-md-6">
              <h2>Commentaires</h2>
@@ -46,11 +50,14 @@
              <tbody>
              <tr>
 
-                 <td><a href="index.php?action=showChapter&id={{ comment.comment_chapter_id }}">{{ comment.comment_author }}</a></td>
+                 <td>
+                     <a href="index.php?action=showChapter&id={{ comment.comment_chapter_id }}">{{ comment.comment_author }}</a>
+                 </td>
                  <td>{{ comment.comment_content }}</td>
                  <td>{{ comment.comment_email }}</td>
                  <td>{{ comment.comment_status }}</td>
-                 <td><a href="index.php?action=showChapter&id={{ comment.comment_chapter_id }}">{{ comment.title }}</a></td>
+                 <td><a href="index.php?action=showChapter&id={{ comment.comment_chapter_id }}">{{ comment.title }}</a>
+                 </td>
                  <td>{{ comment.comment_date }}</td>
                  <td>
                      <div class="btn-group btn-group-sm float-right" role="group" aria-label="...">
@@ -58,7 +65,8 @@
                              <i class="far fa-thumbs-up"></i>O</a>
                          <a href="index.php?action=editComment&id={{ comment.comment_id }}" class="btn btn-warning">
                              <i class="far fa-thumbs-down"></i>N</a>
-                         <a href="index.php?action=deleteComment&id={{ comment.comment_id }}" class="btn btn-danger">
+                         <a href="index.php?action=deleteComment&id={{ comment.comment_id }}" class="btn btn-danger"
+                            onclick="return confirm('Confirmer la suppression ?');">
                              <i class="fa fa-trash"></i>Effacer</a>
                      </div>
                  </td>
