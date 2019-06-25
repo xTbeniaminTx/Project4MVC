@@ -22,6 +22,15 @@ class Router
         $this->request = $request;
     }
 
+    public function isLoggedIn()
+    {
+        if (isset($_SESSION['admin_id'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private $routes = [
         "" => ["controllers" => 'BaseController', "method" => 'home'],
         "home" => ["controllers" => 'BaseController', "method" => 'home'],
@@ -31,6 +40,7 @@ class Router
         "editComment" => ["controllers" => 'BaseController', "method" => 'editComment'],
         "bio" => ["controllers" => 'BaseController', "method" => 'bio'],
         "unapprouve" => ["controllers" => 'BaseController', "method" => 'unapprouve'],
+        "adminLogin" => ["controllers" => 'BaseController', "method" => 'adminLogin'],
     ];
 
     private $routesAdmin = [
@@ -43,7 +53,6 @@ class Router
         "editChapter" => ["controllers" => 'AdminController', "method" => 'editChapter'],
         "deleteChapter" => ["controllers" => 'AdminController', "method" => 'deleteChapter'],
         "deleteComment" => ["controllers" => 'AdminController', "method" => 'deleteComment'],
-        "adminLogin" => ["controllers" => 'AdminController', "method" => 'adminLogin'],
         "logout" => ["controllers" => 'AdminController', "method" => 'logout'],
     ];
 
@@ -60,15 +69,15 @@ class Router
                 $currentController = new $controller();
                 $currentController->$method();
             } elseif (key_exists($request, $this->routesAdmin)) {
-//                if (isset($_SESSION['login'])) {
+                if ($this->isLoggedIn()) {
                     $controller = $this->routesAdmin[$request]['controllers'];
                     $method = $this->routesAdmin[$request]['method'];
 
                     $currentController = new $controller();
                     $currentController->$method();
-//                } else {
-//                    throw new Exception(' vous n\'avez pas accès, veuillez vous connecter');
-//                }
+                } else {
+                    header('Location: index.php?action=adminLogin');
+                }
             } else {
                 throw new Exception(' 404 aucune page trouvée');
             }
