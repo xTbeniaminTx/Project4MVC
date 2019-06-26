@@ -2428,6 +2428,8 @@ a.text-jeanforteroche:hover, a.text-jeanforteroche:focus { color: #fdad70 !impor
   .table .thead-dark th { color: inherit; border-color: #dee2e6; } }
 body { font-family: "Raleway", sans-serif; }
 
+.huge { font-size: 50px; line-height: normal; }
+
 .mt-10 { margin-top: 5rem; }
 
 #msg-flash { z-index: 99; }
