@@ -99,14 +99,12 @@ class BaseController extends Controller
 
     public function home()
     {
-        if ($this->isLoggedIn()) {
-            header('Location: index.php?action=adminView');
-        }
+        $chapters = $this->chapterModel->getChapters();
 
         global $twig;
         $vue = $twig->load('home.html.twig');
         echo $vue->render([
-            'title' => SITENAME,
+            'chapters' => $chapters,
             'ben' => 'Beniamin Tolan'
         ]);
 
@@ -170,6 +168,7 @@ class BaseController extends Controller
 
     public function showChapter()
     {
+
         $comment_message = flash('comment_message');
         $message_comment = <<<EOD
                     $comment_message
@@ -230,6 +229,7 @@ EOD;
                 echo $vue->render($data);
             }
         } else {
+            $chapters = $this->chapterModel->getChapters();
             $chapter = $this->chapterModel->getChaptersById($_GET['id']);
             $comments = $this->commentModel->getComments();
             $commentsById = $this->commentModel->getCommentsById($_GET['id']);
@@ -238,6 +238,7 @@ EOD;
             $data = [
                 'comment_message' => $message_comment,
                 'chapter' => $chapter,
+                'chapters' => $chapters,
                 'comments' => $comments,
                 'id' => 10 + rand(10, 50),
                 'photoId' => $photoId,

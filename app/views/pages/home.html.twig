@@ -14,37 +14,21 @@
             <h1 class="display-3">"Billet simple pour l'Alaska"</h1>
             <p class="lead d-none d-md-block">"Chaque secret de l'âme d'un écrivain, chaque expérience de sa vie, chaque
                 qualité de son esprit est écrit en grand dans ses œuvres."</p>
-            <button id="chapters" class="btn btn-lg btn-primary px-5">LIRE LES CHAPITRES</button>
+            <a id="chapters" href="index.php?action=chapters" class="btn btn-lg btn-primary px-5">LIRE LES CHAPITRES</a>
         </div>
     </section>
     <section>
         <div class="container text-center mt-5">
-            <h2>CHOISIR UN CHAPITRE</h2>
+            <h2>LES PLUS APPRECIE</h2>
             <div class="row">
+                {% for chapter in chapters|slice(0,3) %}
                 <div class="col-md-4 p-3">
                     <img src="images/icons/nature.png" alt="" class="img-fluid">
-                    <h3>Chapitre 1</h3>
-                    <p class="lead d-none d-sm-inline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque
-                        dolore doloribus ea
-                        iste, itaque quo quod repudiandae sint unde. Aperiam consequatur doloremque error esse
-                        exercitationem ipsum itaque maiores officia optio!</p>
+                    <h3>{{ chapter.title }}</h3>
+                    <p class="lead d-none d-sm-inline">{{ chapter.content|slice(0,500)|raw }}...</p>
                 </div>
-                <div class="col-md-4 p-3">
-                    <img src="images/icons/nature.png" alt="" class="img-fluid">
-                    <h3>Chapitre 2</h3>
-                    <p class="lead d-none d-sm-inline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque
-                        dolore doloribus ea
-                        iste, itaque quo quod repudiandae sint unde. Aperiam consequatur doloremque error esse
-                        exercitationem ipsum itaque maiores officia optio!</p>
-                </div>
-                <div class="col-md-4 p-3">
-                    <img src="images/icons/nature.png" alt="" class="img-fluid">
-                    <h3>Chapitre 3</h3>
-                    <p class="lead d-none d-sm-inline">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque
-                        dolore doloribus ea
-                        iste, itaque quo quod repudiandae sint unde. Aperiam consequatur doloremque error esse
-                        exercitationem ipsum itaque maiores officia optio!</p>
-                </div>
+                {% endfor %}
+
             </div>
         </div>
     </section>

@@ -85,6 +85,7 @@ EOD;
                 'title' => trim($_POST['title']),
                 'content' => trim($_POST['content']),
                 'admin_id' => $_SESSION['admin_id'],
+                'content_date' => date('Y-m-d H:i:s'),
                 'title_err' => '',
                 'content_err' => '',
             ];

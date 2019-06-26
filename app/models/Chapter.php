@@ -21,11 +21,12 @@ class Chapter
 
     public function addChapter($data)
     {
-        $this->db->query('INSERT INTO chapters (id, title, content)
-                              VALUES(:id, :title, :content)');
+        $this->db->query('INSERT INTO chapters (id, title, content, content_date)
+                              VALUES(:id, :title, :content, :content_date)');
         $this->db->bind(':id', $data['id']);
         $this->db->bind(':title', $data['title']);
         $this->db->bind(':content', $data['content']);
+        $this->db->bind(':content_date', $data['content_date']);
 
         //execute
         if ($this->db->execute()) {
