@@ -2,7 +2,7 @@
 
 {% block body %}
 
-    <section id="showcase" style="min-height: 450px;" class="d-flex justify-content-center align-items-center">
+    <section id="showcase" style="min-height: 750px;" class="d-flex justify-content-center align-items-center">
         <div id="overlay"></div>
         <div id="header" class="container text-white text-center">
             <h3 class="display-5 mb-0">Publications</h3>
@@ -50,7 +50,7 @@
                     <hr>
 
                     <!-- Preview Image -->
-                    {{ dump(chapter) }}
+{#                    {{ dump(chapter) }}#}
                     <img class="img-fluid" src="https://picsum.photos/id/{{ id }}/900/300" alt="">
 
                     <hr>
@@ -66,7 +66,7 @@
 
                     <!-- Comments Form -->
                     <div class="well">
-                        {{ dump() }}
+{#                        {{ dump() }}#}
                         <h4>Laissez-nous un commentaire:</h4>
                         <form action="index.php?action=showChapter&id={{ chapter.id }}" method="POST">
 
@@ -123,9 +123,24 @@
                                 </h4>
                                 {{ comment.comment_content }}
                             </div>
-                            <a href="index.php?action=unapprouve&comment_id={{ comment.comment_id }}&id={{ comment.chapterId }}" class="btn btn-warning" onclick="return confirm('Confirmer la signalisation ?');">
-                                Signaler
-                            </a>
+                            <ul class="flex-column jf">
+                                <li class="my-1">
+                                    <a href="index.php?action=unapprouve&comment_id={{ comment.comment_id }}&id={{ comment.chapterId }}"
+                                       class="btn btn-sm btn-warning"
+                                       onclick="return confirm('Confirmer la signalisation ?');">
+                                        Signaler
+                                    </a>
+                                </li>
+                                {% if adminLogged  %}
+                                <li >
+                                    <a href="index.php?action=deleteComment&comment_id={{ comment.comment_id }}&id={{ comment.chapterId }}"
+                                       class="btn btn-sm btn-danger"
+                                       onclick="return confirm('Confirmer la suppresion ?');">
+                                        Supprimer <i class="fas fa-trash"></i>
+                                    </a>
+                                </li>
+                                {% endif %}
+                            </ul>
                         </div>
 
                     {% endfor %}
@@ -135,13 +150,11 @@
                 <div class="col-md-4">
 
                     <!-- Blog Search Well -->
-                    <div class="well">
-                        <h4>Blog Search</h4>
+                    <div class="well py-2">
+                        <h4>Trouver Chapitre</h4>
                         <div class="input-group">
                             <input type="text" class="form-control">
-
-                            <button class="btn btn-default" type="button">
-
+                            <button class="btn btn-primary" type="button">Trouver
                             </button>
 
                         </div>
@@ -161,7 +174,7 @@
                                 </ul>
 
                             </div>
-                            <div class="socialCustom">
+                            <div class="socialCustom col-md-0">
                                 <div class="wrapper">
                                     <ul>
                                         <li class="facebook">
@@ -202,20 +215,15 @@
                         <!-- /.row -->
                     </div>
 
-                    <!-- Side Widget Well -->
-                    <div class="well">
-                        <h4>Side Widget Well</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci
-                            accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-                    </div>
 
                 </div>
 
             </div>
             <!-- /.row -->
 
-            <hr>
+
         </div>
+        <hr>
     </section>
 
 

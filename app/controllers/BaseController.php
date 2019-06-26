@@ -17,6 +17,7 @@ class BaseController extends Controller
         $_SESSION['admin_email'] = $login->email;
         header('Location: index.php?action=adminChapters');
     }
+
     public function adminLogin()
     {
         if ($this->isLoggedIn()) {
@@ -131,7 +132,8 @@ class BaseController extends Controller
                 $mailer = new Swift_Mailer($transport);
 
                 // Create a message
-                var_dump($_POST);die;
+                var_dump($_POST);
+                die;
 
                 $message = (new Swift_Message('Wonderful Subject'))
                     ->setFrom([$_POST['txtEmail'] => $_POST['txtName']])
@@ -185,6 +187,7 @@ EOD;
             $comments = $this->commentModel->getComments();
             $commentsById = $this->commentModel->getCommentsById($_GET['id']);
 
+
             $data = [
                 'comment_author' => trim($_POST['comment_author']),
                 'comment_email' => trim($_POST['comment_email']),
@@ -234,8 +237,10 @@ EOD;
             $comments = $this->commentModel->getComments();
             $commentsById = $this->commentModel->getCommentsById($_GET['id']);
             $photoId = rand(10, 50);
+            $adminLogged = isset($_SESSION['admin_id']) ? true : false;
 
             $data = [
+                'adminLogged' => $adminLogged,
                 'comment_message' => $message_comment,
                 'chapter' => $chapter,
                 'chapters' => $chapters,

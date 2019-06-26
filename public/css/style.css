@@ -2432,6 +2432,10 @@ body { font-family: "Raleway", sans-serif; }
 
 #msg-flash { z-index: 99; }
 
+.personalStar { color: goldenrod; }
+
+ul.flex-column.jf { list-style: none; }
+
 .socialCustom .wrapper { position: absolute; top: 50%; left: 45%; transform: translate(-50%, -50%); }
 .socialCustom ul { list-style: none; }
 .socialCustom ul li { width: 50px; height: 50px; background: #e59500; margin: 10px 0; border-radius: 3px; position: relative; cursor: pointer; box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); }
@@ -2450,13 +2454,14 @@ body { font-family: "Raleway", sans-serif; }
 .socialCustom ul li.whatsapp div.slider { background: #82d47e; }
 .socialCustom ul li:hover .slider { width: 180px; }
 .socialCustom ul li:hover .slider p { opacity: 1; }
+@media (max-width: 767.98px) { .socialCustom .wrapper { display: none; } }
 
 .navbar { font-weight: 100; position: absolute; top: 0; right: 0; left: 0; z-index: 3; }
 .navbar .navbar-brand h3 { font-weight: 100; }
 .navbar .nav-item { font-size: 1.4rem; }
 .navbar .nav-link:hover { transition: border 0.2s; border-bottom: 1px solid white; }
 
-#showcase { background: url("../images/main.jpeg") bottom/cover no-repeat; min-height: 750px; position: relative; }
+#showcase { background: url("../images/main.jpeg") bottom/cover no-repeat; min-height: 900px; position: relative; }
 #showcase #header { z-index: 2; }
 #showcase #overlay { background: rgba(0, 0, 0, 0.2); position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
 #showcase h1 { font-family: "Questrial", sans-serif; line-height: 1; }

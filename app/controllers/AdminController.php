@@ -201,10 +201,14 @@ EOD;
     public function deleteComment()
     {
 
-        $id = $_GET['id'];
+        $idComment = $_GET['comment_id'];
 
-        if ($this->commentModel->deleteComment($id)) {
-            header('Location: index.php?action=adminComments');
+        if ($this->commentModel->deleteComment($idComment)) {
+            if (isset($_GET['id'])) {
+                header('Location: index.php?action=showChapter&id='.$_GET['id']);
+            } else {
+                header('Location: index.php?action=adminComments');
+            }
             flash('comment_message', 'Le commentaire a ete supprime');
         } else {
             die('Qq du mal se passe');
