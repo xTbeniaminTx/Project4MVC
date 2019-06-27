@@ -15,7 +15,7 @@ class AdminController extends Controller
     {
 
         global $twig;
-        $vue = $twig->load('admin.dashboard.html.twig');
+        $vue = $twig->load('admin.base.html.twig');
         echo $vue->render([
             'title' => "Admin Dashboard",
             'admin_id' => $_SESSION['admin_id']
