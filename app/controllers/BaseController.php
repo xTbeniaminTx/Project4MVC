@@ -21,7 +21,7 @@ class BaseController extends Controller
     public function adminLogin()
     {
         if ($this->isLoggedIn()) {
-            header('Location: index.php?action=adminView');
+            header('Location: index.php?action=adminChapters');
         } else {
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 //process form
