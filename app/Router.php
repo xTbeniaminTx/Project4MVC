@@ -41,6 +41,7 @@ class Router
         "bio" => ["controllers" => 'BaseController', "method" => 'bio'],
         "unapprouve" => ["controllers" => 'BaseController', "method" => 'unapprouve'],
         "adminLogin" => ["controllers" => 'BaseController', "method" => 'adminLogin'],
+        "sendMail" => ["controllers" => 'BaseController', "method" => 'sendMail'],
     ];
 
     private $routesAdmin = [

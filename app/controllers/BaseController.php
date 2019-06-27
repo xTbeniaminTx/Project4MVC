@@ -113,43 +113,48 @@ class BaseController extends Controller
 
     public function contact()
     {
+        $contact_message = flash('contact_message');
+        $message_contact = <<<EOD
+                    $contact_message
+EOD;
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            global $twig;
-            $vue = $twig->load('contact.html.twig');
-            echo $vue->render([
-                'titre' => "salut",
-                'ben' => 'Beniamin Tolan'
-            ]);
-            if (isset($_POST['sendMail'])) {
-                //SWIFTMAILER
-                // Create the Transport
-                $transport = (new Swift_SmtpTransport('smtp.googlemail.com', 465, 'ssl'))
-                    ->setUsername('beniamin777tolan@gmail.com')
-                    ->setPassword('rewopi123456');
+        global $twig;
+        $vue = $twig->load('contact.html.twig');
+        echo $vue->render([
+            'titre' => "salut",
+            'ben' => 'Beniamin Tolan',
+            'contact_message' => $message_contact
+        ]);
 
-                // Create the Mailer using your created Transport
-                $mailer = new Swift_Mailer($transport);
+    }
 
-                // Create a message
-                var_dump($_POST);
-                die;
+    public function sendMail() {
 
-                $message = (new Swift_Message('Wonderful Subject'))
-                    ->setFrom([$_POST['txtEmail'] => $_POST['txtName']])
-                    ->setTo(['beniamin777tolan@gmail.com' => 'John Doe'])
-                    ->setBody($_POST['txtMsg']);
+        if (isset($_POST['btnSubmit'])) {
+            //SWIFTMAILER
+            // Create the Transport
+            $transport = (new Swift_SmtpTransport('smtp.googlemail.com', 465, 'ssl'))
+                ->setUsername('beniamin777tolan@gmail.com')
+                ->setPassword('rewopi123456');
 
-                // Send the message
-                $result = $mailer->send($message);
+            // Create the Mailer using your created Transport
+            $mailer = new Swift_Mailer($transport);
 
-                return $result;
-            } else {
-                die('error');
-            }
+            // Create a message
+            $message = (new Swift_Message('Wonderful Subject'))
+                ->setFrom(['noreply@jeanforteroche.me' => 'Blog JF'])
+                ->setReplyTo([$_POST['txtEmail'] => $_POST['txtName']])
+                ->setTo(['beniamin777tolan@gmail.com' => 'Admin JF'])
+                ->setBody($_POST['txtMsg']);
 
+            // Send the message
+            $result = $mailer->send($message);
+            header('Location: index.php?action=contact');
+            flash('contact_message', 'Message envoyee avec success');
+
+        } else {
+            die('error');
         }
-
     }
 
     public function chapters()
@@ -218,7 +223,6 @@ EOD;
             if (empty($data['comment_author_err']) && empty($data['comment_email_err']) && empty($data['comment_content_err'])) {
                 //validated
                 if ($this->commentModel->addComment($data)) {
-//var_dump($data);die;
                     header('Location: index.php?action=showChapter&id=' . $_GET['id']);
                     flash('comment_message', 'Nouveau commentaire ajoute avec success');
                 } else {
