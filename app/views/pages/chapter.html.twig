@@ -9,22 +9,9 @@
             <h1 class="display-3">Jean Forteroche</h1>
         </div>
     </section>
-    <section>
-        <div class="container text-center mt-4">
-            <i class="fas fa-quote-left fa-2x text-primary mb-3"></i>
-            <blockquote class="blockquote">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam asperiores, consequuntur
-                    debitis eaque eos error explicabo ipsum quae sit. Lorem ipsum dolor sit amet, consectetur
-                    adipisicing elit. Aliquam atque corporis culpa debitis earum eos esse facere, harum id in optio
-                    quasi qui quo saepe sequi. Animi dignissimos repellat tempore.
-                </p>
-                <footer class="blockquote-footer">Mark Twain</footer>
-            </blockquote>
-        </div>
-    </section>
 
-    <section>
+
+    <section class="my-5">
         <div class="container">
 
             <div class="row">
@@ -50,14 +37,14 @@
                     <hr>
 
                     <!-- Preview Image -->
-{#                    {{ dump(chapter) }}#}
-                    <img class="img-fluid" src="https://picsum.photos/id/{{ id }}/900/300" alt="">
+
+                    <img class="img-fluid" src="https://picsum.photos/id/{{ id }}/900/300" alt="chapter photo">
 
                     <hr>
 
                     <!-- Post Content -->
-                    {#                    class="lead"#}
-                    <p class="lead">{{ chapter.content |raw }}</p>
+
+                    <p class="lead text-justify">{{ chapter.content |raw }}</p>
 
                     <hr>
 
@@ -71,20 +58,18 @@
                         <form action="index.php?action=showChapter&id={{ chapter.id }}" method="POST">
 
                             <div class="form-group row">
-                                <label for="comment_author" class="col-sm-2">Author</label>
+                                <label for="comment_author" class="col-sm-2">Auteur</label>
                                 <div class="col-sm-10">
                                     <input type="text"
                                            class="form-control {{ (comment_author_err is not empty) ? 'is-invalid' : '' }}"
                                            name="comment_author" value="{{ comment_author }}">
                                 </div>
                                 <span class="invalid-feedback d-block text-center">{{ comment_author_err }}</span>
-
-
                             </div>
 
 
                             <div class="form-group row">
-                                <label for="comment_email" class="col-sm-2">Email</label>
+                                <label for="comment_email" class="col-sm-2">Mail</label>
                                 <div class="col-sm-10">
                                     <input type="text"
                                            class="form-control {{ (comment_email_err is not empty) ? 'is-invalid' : '' }}"
@@ -100,7 +85,7 @@
                                         rows="3" name="comment_content">{{ comment_content }}</textarea>
                                 <span class="invalid-feedback d-block text-center">{{ comment_content_err }}</span>
                             </div>
-                            <button name="create_comment" type="submit" class="btn btn-primary">Submit</button>
+                            <button name="create_comment" type="submit" class="btn btn-primary">Envoyer</button>
                         </form>
                     </div>
 
@@ -147,11 +132,11 @@
                 </div>
 
                 <!-- Blog Sidebar Widgets Column -->
-                <div class="col-md-4">
+                <div class="col-md-4 py-2">
 
                     <!-- Blog Categories Well -->
-                    <div class="card mt-5 py-2">
-                        <h4>Blog Chapitres</h4>
+                    <div class="card px-3">
+                        <h4>Chapitres</h4>
                         <div class="row">
                             <div class="col-lg-12">
                                 <ul class="list-unstyled">
@@ -161,42 +146,6 @@
                                     {% endfor %}
                                 </ul>
 
-                            </div>
-                            <div class="socialCustom col-md-0">
-                                <div class="wrapper">
-                                    <ul>
-                                        <li class="facebook">
-                                            <i class="fa fa-facebook" aria-hidden="true"></i>
-                                            <div class="slider">
-                                                <p>facebook</p>
-                                            </div>
-                                        </li>
-                                        <li class="twitter">
-                                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                                            <div class="slider">
-                                                <p>twitter</p>
-                                            </div>
-                                        </li>
-                                        <li class="instagram">
-                                            <i class="fa fa-instagram" aria-hidden="true"></i>
-                                            <div class="slider">
-                                                <p>instagram</p>
-                                            </div>
-                                        </li>
-                                        <li class="google">
-                                            <i class="fa fa-google" aria-hidden="true"></i>
-                                            <div class="slider">
-                                                <p>google</p>
-                                            </div>
-                                        </li>
-                                        <li class="whatsapp">
-                                            <i class="fa fa-whatsapp" aria-hidden="true"></i>
-                                            <div class="slider">
-                                                <p>whatsapp</p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
 
