@@ -191,7 +191,7 @@ EOD;
 
         if ($this->chapterModel->deleteChapter($id)) {
             header('Location: index.php?action=adminChapters');
-            flash('chapter_message', 'Le chapitre a ete dupprime');
+            flash('chapter_message', 'Le chapitre a été supprimé');
         } else {
             die('Qq du mal se passe');
         }
