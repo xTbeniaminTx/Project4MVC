@@ -150,7 +150,7 @@ EOD;
             // Send the message
             $result = $mailer->send($message);
             header('Location: index.php?action=contact');
-            flash('contact_message', 'Message envoyee avec success');
+            flash('contact_message', 'Message envoyee avec succès');
 
         } else {
             die('error');
@@ -224,7 +224,7 @@ EOD;
                 //validated
                 if ($this->commentModel->addComment($data)) {
                     header('Location: index.php?action=showChapter&id=' . $_GET['id']);
-                    flash('comment_message', 'Nouveau commentaire ajoute avec success');
+                    flash('comment_message', 'Nouveau commentaire ajouté avec succès');
                 } else {
                     die('qq terible vien de se passer');
                 }
@@ -272,10 +272,10 @@ EOD;
         if ($this->commentModel->unapprouveStatus($id)) {
             if ($this->isLoggedIn()) {
                 header('Location: index.php?action=adminComments');
-                flash('comment_message', 'Le commentaire a ete desapprouve');
+                flash('comment_message', 'Le commentaire a été désapprouvé');
             } else {
                 header('Location: index.php?action=showChapter&id=' . $idChapter);
-                flash('comment_message', 'Le commentaire a ete desapprouve');
+                flash('comment_message', 'Le commentaire a été désapprouvé');
             }
 
         } else {

@@ -92,7 +92,7 @@ EOD;
 
             //Validate data
             if (empty($data['title'])) {
-                $data['title_err'] = 'Veuillez entre un titre';
+                $data['title_err'] = 'Veuillez entcvxvre un titre';
             }
             if (empty($data['content'])) {
                 $data['content_err'] = 'Veuillez entre un contenu pour votre chapitre';
@@ -103,7 +103,7 @@ EOD;
                 //validated
                 if ($this->chapterModel->addChapter($data)) {
                     header('Location: index.php?action=adminChapters');
-                    flash('chapter_message', 'Nouveau chapitre ajoute avec success');
+                    flash('chapter_message', 'Nouveau chapitre ajouté avec succès');
                 } else {
                     die('qq terible vien de se passer');
                 }
@@ -146,7 +146,7 @@ EOD;
 
             //Validate data
             if (empty($data['title'])) {
-                $data['title_err'] = 'Veuillez entre un titre';
+                $data['title_err'] = 'Veuillez entrvcxvxce un titre';
             }
             if (empty($data['content'])) {
                 $data['content_err'] = 'Veuillez entre un contenu pour votre chapitre';
@@ -158,7 +158,7 @@ EOD;
                 if ($this->chapterModel->updateChapter($data)) {
                     header('Location: index.php?action=adminChapters');
 //                        sleep(2);
-                    flash('chapter_message', 'Le chapitre a ete modifiee avec success');
+                    flash('chapter_message', 'Le chapitre a été modifié avec succès');
                 } else {
                     die('qq terible vien de se passer');
                 }
@@ -209,7 +209,7 @@ EOD;
             } else {
                 header('Location: index.php?action=adminComments');
             }
-            flash('comment_message', 'Le commentaire a ete supprime');
+            flash('comment_message', 'Le commentaire a été supprimé');
         } else {
             die('Qq du mal se passe');
         }
@@ -224,7 +224,7 @@ EOD;
 
         if ($this->commentModel->approuveStatus($id)) {
             header('Location: index.php?action=adminComments');
-            flash('comment_message', 'Le commentaire a ete approuve');
+            flash('comment_message', 'Le commentaire a été approuvé');
         } else {
             die('Qq du mal se passe');
         }
