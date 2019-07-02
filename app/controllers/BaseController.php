@@ -128,7 +128,8 @@ EOD;
 
     }
 
-    public function sendMail() {
+    public function sendMail()
+    {
 
         if (isset($_POST['btnSubmit'])) {
             //SWIFTMAILER
@@ -145,7 +146,8 @@ EOD;
                 ->setFrom(['noreply@jeanforteroche.me' => 'Blog JF'])
                 ->setReplyTo([$_POST['txtEmail'] => $_POST['txtName']])
                 ->setTo(['beniamin777tolan@gmail.com' => 'Admin JF'])
-                ->setBody($_POST['txtMsg']);
+                ->setBody('Message: ' . $_POST['txtMsg'])
+                ->addPart('<strong>Message:</strong><p> '.$_POST['txtMsg'].'</p><br/><strong>Telephone:</strong> '.$_POST['txtPhone'], 'text/html');
 
             // Send the message
             $result = $mailer->send($message);
@@ -198,7 +200,7 @@ EOD;
                 'comment_email' => trim($_POST['comment_email']),
                 'comment_content' => trim($_POST['comment_content']),
                 'comment_date' => date('Y-m-d H:i:s'),
-                'comment_status' => 'unapprouved',
+                'comment_status' => 'newComment',
                 'comment_author_err' => null,
                 'comment_email_err' => null,
                 'comment_content_err' => null,
@@ -253,7 +255,6 @@ EOD;
                 'photoId' => $photoId,
                 'commentsById' => $commentsById,
                 'comment_date' => date('Y-m-d H:i:s'),
-//                'comment_status' => 'unapprouved',
 
 
             ];

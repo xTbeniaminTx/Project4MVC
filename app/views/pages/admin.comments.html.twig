@@ -33,35 +33,35 @@
              <th scope="col">Status</th>
              <th scope="col">En Reponse A</th>
              <th scope="col">Date</th>
-             <th scope="col" class="text-warning">Appe/Unapp/Del</th>
+             <th scope="col" class="text-warning"></th>
 
          </tr>
          </thead>
 
          {#         {{ dump() }}#}
-         {% for comment in comments %}
+         {% for comment in comments if comment.comment_status == 'unapprouved' or comment.comment_status == 'newComment' %}
              <tbody>
              <tr>
 
                  <td>
                      <a href="index.php?action=showChapter&id={{ comment.comment_chapter_id }}">{{ comment.comment_author }}</a>
                  </td>
-                 <td>{{ comment.comment_content }}</td>
-                 <td>{{ comment.comment_email }}</td>
+                 <td>{{ comment.comment_content |raw }}</td>
+                 <td>{{ comment.comment_email | raw}}</td>
                  <td>{{ comment.comment_status }}</td>
-                 <td><a href="index.php?action=showChapter&id={{ comment.comment_chapter_id }}">{{ comment.title }}</a>
+                 <td><a href="index.php?action=showChapter&id={{ comment.comment_chapter_id }}">{{ comment.title | raw}}</a>
                  </td>
                  <td>{{ comment.comment_date }}</td>
                  <td>
                      <div class="btn-group btn-group-sm float-right" role="group" aria-label="...">
                          <a href="index.php?action=approuve&id={{ comment.comment_id }}" class="btn btn-success">
                              <i class="far fa-thumbs-up"></i>Oui</a>
-                         <a href="index.php?action=unapprouve&id={{ comment.comment_id }}" class="btn btn-warning">
-                             <i class="far fa-thumbs-down"></i>Non</a>
+{#                         <a href="index.php?action=unapprouve&id={{ comment.comment_id }}" class="btn btn-warning">#}
+{#                             <i class="far fa-thumbs-down"></i>Non</a>#}
                          <a href="index.php?action=deleteComment&comment_id={{ comment.comment_id }}"
                             class="btn btn-danger"
                             onclick="return confirm('Confirmer la suppression ?');">
-                             <i class="fa fa-trash"></i>Effacer</a>
+                             <i class="far fa-thumbs-down"></i>Non</a>
                      </div>
                  </td>
 

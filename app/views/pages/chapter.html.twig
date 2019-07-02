@@ -95,7 +95,7 @@
 
                     <!-- Comment -->
 
-                    {% for comment in commentsById if comment.comment_status == 'approuved' %}
+                    {% for comment in commentsById if comment.comment_status == 'approuved' or comment.comment_status == 'newComment' %}
                         <div class="media py-2">
                             <a class="pull-left" href="#">
                                 <img class="media-object" src="https://picsum.photos/id/{{ comment.comment_id }}/64/64"
@@ -109,6 +109,7 @@
                                 {{ comment.comment_content }}
                             </div>
                             <ul class="flex-column jf">
+                                {% if comment.comment_status == 'newComment' %}
                                 <li class="my-1">
                                     <a href="index.php?action=unapprouve&comment_id={{ comment.comment_id }}&id={{ comment.chapterId }}"
                                        class="btn btn-sm btn-warning"
@@ -116,6 +117,7 @@
                                         Signaler
                                     </a>
                                 </li>
+                                {% endif %}
                                 {% if adminLogged  %}
                                 <li >
                                     <a href="index.php?action=deleteComment&comment_id={{ comment.comment_id }}&id={{ comment.chapterId }}"
