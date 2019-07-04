@@ -1,8 +1,7 @@
 ﻿{% extends "admin.base.html.twig" %}
 
 {% block pagesActive %}
-{#    <a href="index.php?action=adminView" class="list-group-item list-group-item-action"><i#}
-{#                class="fas fa-tachometer-alt"></i> Dashboard</a>#}
+
     <a href="index.php?action=adminChapters" class="list-group-item list-group-item-action active"><i
                 class="fas fa-book"></i> Chapitres</a>
     <a href="index.php?action=adminComments" class="list-group-item list-group-item-action"><i
@@ -43,7 +42,6 @@
         </tr>
         </thead>
 
-{#        {{ dump() }}#}
         {% for chapter in chapters %}
             <tbody>
             <tr>

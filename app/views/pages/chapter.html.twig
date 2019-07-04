@@ -16,44 +16,30 @@
 
             <div class="row">
 
-                <!-- Blog Post Content Column -->
                 <div class="col-lg-8">
 
-                    <!-- Blog Post -->
-
-                    <!-- Title -->
                     <h1>{{ chapter.title |raw }}</h1>
 
-                    <!-- Author -->
                     <p class="lead">
                         écrit par <a href="index.php?action=bio">Jean Forteroche</a>
                     </p>
 
                     <hr>
 
-                    <!-- Date/Time -->
                     <p> publié le {{ chapter.content_date | date('d/m/Y') }}</p>
 
                     <hr>
-
-                    <!-- Preview Image -->
 
                     <img class="img-fluid" src="https://picsum.photos/id/{{ id }}/900/300" alt="chapter photo">
 
                     <hr>
 
-                    <!-- Post Content -->
-
                     <p class="lead text-justify">{{ chapter.content |raw }}</p>
 
                     <hr>
 
-
-                    <!-- Blog Comments -->
-
-                    <!-- Comments Form -->
                     <div class="well">
-{#                        {{ dump() }}#}
+
                         <h4>Laissez-nous un commentaire:</h4>
                         <form action="index.php?action=showChapter&id={{ chapter.id }}" method="POST">
 
@@ -91,10 +77,6 @@
 
                     <hr>
 
-                    <!-- Posted Comments -->
-
-                    <!-- Comment -->
-
                     {% for comment in commentsById if comment.comment_status == 'approuved' or comment.comment_status == 'newComment' %}
                         <div class="media py-2">
                             <a class="pull-left" href="#">
@@ -110,22 +92,22 @@
                             </div>
                             <ul class="flex-column jf">
                                 {% if comment.comment_status == 'newComment' %}
-                                <li class="my-1">
-                                    <a href="index.php?action=unapprouve&comment_id={{ comment.comment_id }}&id={{ comment.chapterId }}"
-                                       class="btn btn-sm btn-warning"
-                                       onclick="return confirm('Confirmer la signalisation ?');">
-                                        Signaler
-                                    </a>
-                                </li>
+                                    <li class="my-1">
+                                        <a href="index.php?action=unapprouve&comment_id={{ comment.comment_id }}&id={{ comment.chapterId }}"
+                                           class="btn btn-sm btn-warning"
+                                           onclick="return confirm('Confirmer la signalisation ?');">
+                                            Signaler
+                                        </a>
+                                    </li>
                                 {% endif %}
-                                {% if adminLogged  %}
-                                <li >
-                                    <a href="index.php?action=deleteComment&comment_id={{ comment.comment_id }}&id={{ comment.chapterId }}"
-                                       class="btn btn-sm btn-danger"
-                                       onclick="return confirm('Confirmer la suppresion ?');">
-                                        Supprimer <i class="fas fa-trash"></i>
-                                    </a>
-                                </li>
+                                {% if adminLogged %}
+                                    <li>
+                                        <a href="index.php?action=deleteComment&comment_id={{ comment.comment_id }}&id={{ comment.chapterId }}"
+                                           class="btn btn-sm btn-danger"
+                                           onclick="return confirm('Confirmer la suppresion ?');">
+                                            Supprimer <i class="fas fa-trash"></i>
+                                        </a>
+                                    </li>
                                 {% endif %}
                             </ul>
                         </div>
@@ -133,17 +115,17 @@
                     {% endfor %}
                 </div>
 
-                <!-- Blog Sidebar Widgets Column -->
+
                 <div class="col-md-4 py-2">
 
-                    <!-- Blog Categories Well -->
                     <div class="card px-3">
                         <h4>Chapitres</h4>
                         <div class="row">
                             <div class="col-lg-12">
                                 <ul class="list-unstyled">
                                     {% for chapter in chapters %}
-                                        <li><a href="index.php?action=showChapter&id={{ chapter.id }}">{{ chapter.title|raw }}</a>
+                                        <li>
+                                            <a href="index.php?action=showChapter&id={{ chapter.id }}">{{ chapter.title|raw }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>
@@ -151,25 +133,16 @@
                             </div>
                         </div>
 
-                        <!-- /.row -->
                     </div>
 
 
                 </div>
 
             </div>
-            <!-- /.row -->
 
 
         </div>
         <hr>
     </section>
-
-
-
-
-
-
-
 
 {% endblock %}

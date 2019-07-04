@@ -1,12 +1,10 @@
 <?php
 session_start();
 
+//Load helpers, librairies and controllers etc
 require_once '../vendor/autoload.php';
 require_once 'config/config.php';
-
-// Load Helpers
 require_once 'helpers/session_helper.php';
-
 require_once('libraries/Database.php');
 require_once('controllers/Controller.php');
 require_once('controllers/BaseController.php');
@@ -14,23 +12,10 @@ require_once('controllers/AdminController.php');
 
 class Router
 {
+    //------------------------------------------------------------------------------------------------------------------
     private $request;
     private $error;
-
-    public function __construct($request)
-    {
-        $this->request = $request;
-    }
-
-    public function isLoggedIn()
-    {
-        if (isset($_SESSION['admin_id'])) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
+    //------------------------------------------------------------------------------------------------------------------
     private $routes = [
         "" => ["controllers" => 'BaseController', "method" => 'home'],
         "home" => ["controllers" => 'BaseController', "method" => 'home'],
@@ -43,7 +28,7 @@ class Router
         "adminLogin" => ["controllers" => 'BaseController', "method" => 'adminLogin'],
         "sendMail" => ["controllers" => 'BaseController', "method" => 'sendMail'],
     ];
-
+    //------------------------------------------------------------------------------------------------------------------
     private $routesAdmin = [
 
         "adminView" => ["controllers" => 'AdminController', "method" => 'adminView'],
@@ -57,7 +42,13 @@ class Router
         "logout" => ["controllers" => 'AdminController', "method" => 'logout'],
     ];
 
+    //------------------------------------------------------------------------------------------------------------------
+    public function __construct($request)
+    {
+        $this->request = $request;
+    }
 
+    //------------------------------------------------------------------------------------------------------------------
     public function renderController()
     {
         $request = $this->request;
@@ -87,4 +78,15 @@ class Router
             echo $this->error;
         }
     }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public function isLoggedIn()
+    {
+        if (isset($_SESSION['admin_id'])) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //------------------------------------------------------------------------------------------------------------------
 }

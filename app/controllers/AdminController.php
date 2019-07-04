@@ -1,9 +1,9 @@
 <?php
 
-// require_once('model/CommentManager.php');
 
 class AdminController extends Controller
 {
+    //------------------------------------------------------------------------------------------------------------------
     public function __construct()
     {
         $this->loginModel = $this->model('Login');
@@ -11,17 +11,9 @@ class AdminController extends Controller
         $this->commentModel = $this->model('Comment');
     }
 
-    public function adminView()
-    {
 
-        global $twig;
-        $vue = $twig->load('admin.base.html.twig');
-        echo $vue->render([
-            'title' => "Admin Dashboard",
-            'admin_id' => $_SESSION['admin_id']
-        ]);
 
-    }
+    //------------------------------------------------------------------------------------------------------------------
 
     public function adminChapters()
     {
@@ -35,7 +27,6 @@ EOD;
         $data = [
             'title' => "Admin Chapters",
             'chapters' => $chapters,
-            'ben' => 'Beniamin Tolan',
             'chapter_message' => $message_chapter,
 
         ];
@@ -45,34 +36,8 @@ EOD;
 
     }
 
-    public function adminComments()
-    {
-        $chapters = $this->chapterModel->getChapters();
-        foreach ($chapters as $chapter) {
-            $id = $chapter->id;
-        }
-        $comments = $this->commentModel->getComments();
-        $chapterModel = $this->chapterModel;
 
-        $comment_message = flash('comment_message');
-        $message_comment = <<<EOD
-                    $comment_message
-EOD;
-
-        $data = [
-            'chapterId' => $id,
-            'comments' => $comments,
-            'chapters' => $chapters,
-            'ben' => 'Beniamin comment',
-            'comment_message' => $message_comment,
-            'chapterModel' => $chapterModel
-
-        ];
-        global $twig;
-        $vue = $twig->load('admin.comments.html.twig');
-        echo $vue->render($data);
-
-    }
+    //------------------------------------------------------------------------------------------------------------------
 
     public function addChapter()
     {
@@ -92,7 +57,7 @@ EOD;
 
             //Validate data
             if (empty($data['title'])) {
-                $data['title_err'] = 'Veuillez entcvxvre un titre';
+                $data['title_err'] = 'Veuillez entre un titre';
             }
             if (empty($data['content'])) {
                 $data['content_err'] = 'Veuillez entre un contenu pour votre chapitre';
@@ -105,7 +70,7 @@ EOD;
                     header('Location: index.php?action=adminChapters');
                     flash('chapter_message', 'Nouveau chapitre ajouté avec succès');
                 } else {
-                    die('qq terible vien de se passer');
+                    die('Impossible de traiter cette demande à l\'heure actuelle.');
                 }
 
             } else {
@@ -125,6 +90,8 @@ EOD;
         }
 
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public function editChapter()
     {
@@ -146,7 +113,7 @@ EOD;
 
             //Validate data
             if (empty($data['title'])) {
-                $data['title_err'] = 'Veuillez entrvcxvxce un titre';
+                $data['title_err'] = 'Veuillez entre un titre';
             }
             if (empty($data['content'])) {
                 $data['content_err'] = 'Veuillez entre un contenu pour votre chapitre';
@@ -157,10 +124,9 @@ EOD;
                 //validated
                 if ($this->chapterModel->updateChapter($data)) {
                     header('Location: index.php?action=adminChapters');
-//                        sleep(2);
                     flash('chapter_message', 'Le chapitre a été modifié avec succès');
                 } else {
-                    die('qq terible vien de se passer');
+                    die('Impossible de traiter cette demande à l\'heure actuelle.');
                 }
 
             } else {
@@ -184,6 +150,8 @@ EOD;
 
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public function deleteChapter()
     {
 
@@ -193,10 +161,43 @@ EOD;
             header('Location: index.php?action=adminChapters');
             flash('chapter_message', 'Le chapitre a été supprimé');
         } else {
-            die('Qq du mal se passe');
+            die('Impossible de traiter cette demande à l\'heure actuelle.');
         }
 
     }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public function adminComments()
+    {
+        $chapters = $this->chapterModel->getChapters();
+        foreach ($chapters as $chapter) {
+            $id = $chapter->id;
+        }
+        $comments = $this->commentModel->getComments();
+        $chapterModel = $this->chapterModel;
+
+        $comment_message = flash('comment_message');
+        $message_comment = <<<EOD
+                    $comment_message
+EOD;
+
+        $data = [
+            'chapterId' => $id,
+            'comments' => $comments,
+            'chapters' => $chapters,
+            'comment_message' => $message_comment,
+            'chapterModel' => $chapterModel
+
+        ];
+        global $twig;
+        $vue = $twig->load('admin.comments.html.twig');
+        echo $vue->render($data);
+
+    }
+
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public function deleteComment()
     {
@@ -205,16 +206,18 @@ EOD;
 
         if ($this->commentModel->deleteComment($idComment)) {
             if (isset($_GET['id'])) {
-                header('Location: index.php?action=showChapter&id='.$_GET['id']);
+                header('Location: index.php?action=showChapter&id=' . $_GET['id']);
             } else {
                 header('Location: index.php?action=adminComments');
             }
             flash('comment_message', 'Le commentaire a été supprimé');
         } else {
-            die('Qq du mal se passe');
+            die('Impossible de traiter cette demande à l\'heure actuelle.');
         }
 
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public function approuve()
     {
@@ -226,12 +229,27 @@ EOD;
             header('Location: index.php?action=adminComments');
             flash('comment_message', 'Le commentaire a été approuvé');
         } else {
-            die('Qq du mal se passe');
+            die('Impossible de traiter cette demande à l\'heure actuelle.');
         }
 
 
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    public function adminView()
+    {
+
+        global $twig;
+        $vue = $twig->load('admin.base.html.twig');
+        echo $vue->render([
+            'title' => "Admin Dashboard",
+            'admin_id' => $_SESSION['admin_id']
+        ]);
+
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public function logout()
     {
@@ -241,5 +259,5 @@ EOD;
         header('Location: index.php?action=home');
     }
 
-
+    //------------------------------------------------------------------------------------------------------------------
 }

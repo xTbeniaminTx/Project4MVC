@@ -57,12 +57,14 @@
                 <div class="col-md-4 d-none d-lg-block">
                     <div class="list-group">
                         {% block pagesActive %}
-{#                            <a href="index.php?action=adminView" class="list-group-item list-group-item-action active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>#}
-                            <a href="index.php?action=adminChapters" class="list-group-item list-group-item-action"><i class="fas fa-book"></i> Chapitres</a>
-                            <a href="index.php?action=adminComments" class="list-group-item list-group-item-action"><i class="fas fa-comments"></i> Commentaires</a>
+                            <a href="index.php?action=adminChapters" class="list-group-item list-group-item-action"><i
+                                        class="fas fa-book"></i> Chapitres</a>
+                            <a href="index.php?action=adminComments" class="list-group-item list-group-item-action"><i
+                                        class="fas fa-comments"></i> Commentaires</a>
                         {% endblock %}
 
-                        <a href="index.php?action=logout" class="list-group-item list-group-item-action"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a href="index.php?action=logout" class="list-group-item list-group-item-action"><i
+                                    class="fas fa-sign-out-alt"></i> Logout</a>
                     </div>
                 </div>
 
@@ -80,7 +82,7 @@
 {% endblock %}
 
 <footer class="text-center bg-secondary" id="adminFooter">
-    <p>Copyright Beniamin Tolan</p>
+    <p class="mt-5 mb-3 text-muted">&copy; 2019 BenjiCodeur</p>
 </footer>
 
 {% block javascripts %}

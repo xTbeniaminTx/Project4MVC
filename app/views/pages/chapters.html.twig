@@ -13,10 +13,8 @@
 
             <div class="row my-5">
 
-                <!-- Blog Entries Column -->
                 <div class="col-md-8">
-                    {#                    {{ dump(chapters) }}#}
-                    <!-- First Blog Post -->
+
                     {% for chapter in chapters %}
                         <div class="card card-body my-5">
 
@@ -40,17 +38,16 @@
 
                 </div>
 
-                <!-- Blog Sidebar Widgets Column -->
                 <div class="col-md-4 my-5">
 
-                    <!-- Blog Chapitres Well -->
                     <div class="card">
                         <div class="card-body">
                             <h4>Chapitres</h4>
                             <div class="col-lg-12">
                                 <ul class="list-unstyled">
                                     {% for chapter in chapters %}
-                                        <li><a href="index.php?action=showChapter&id={{ chapter.id }}">{{ chapter.title|raw }}</a>
+                                        <li>
+                                            <a href="index.php?action=showChapter&id={{ chapter.id }}">{{ chapter.title|raw }}</a>
                                         </li>
                                     {% endfor %}
                                 </ul>
@@ -58,19 +55,14 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
 
-
         </div>
-        <!-- /.row -->
 
         <hr>
 
     </section>
-
 
     <section>
         <div class="container text-center my-5">
@@ -104,8 +96,5 @@
             </div>
         </div>
     </section>
-
-
-
 
 {% endblock %}

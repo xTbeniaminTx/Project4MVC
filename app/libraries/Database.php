@@ -19,6 +19,8 @@ class Database
     private $stmt;
     private $error;
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public function __construct()
     {
         //Set DSN
@@ -32,13 +34,14 @@ class Database
         //Create PDO instantce
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
-//            $this->dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
         } catch (PDOException $e) {
             $this->error = $e->getMessage();
             echo $this->error;
         }
 
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     /*
      * Prepare function with query
@@ -47,6 +50,8 @@ class Database
     {
         $this->stmt = $this->dbh->prepare($sql);
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     /*
      * Bind values
@@ -73,6 +78,8 @@ class Database
         $this->stmt->bindValue($param, $value, $type);
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /*
      * Execute the prepared statement
      */
@@ -81,26 +88,37 @@ class Database
         return $this->stmt->execute();
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /*
      * get result set as array of objects
      */
-    public function resultSet() {
+    public function resultSet()
+    {
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /*
      * get single record as object
      */
-    public function single() {
+    public function single()
+    {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
     /*
      * call pdo method rowCount on statement
      */
-    public function rowCount() {
+    public function rowCount()
+    {
         return $this->stmt->rowCount();
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 }

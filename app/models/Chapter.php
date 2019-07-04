@@ -4,10 +4,14 @@ class Chapter
 {
     private $db;
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public function __construct()
     {
         $this->db = new Database;
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public function getChapters()
     {
@@ -18,6 +22,21 @@ class Chapter
         return $results;
 
     }
+
+    //------------------------------------------------------------------------------------------------------------------
+
+    public function getChaptersById($id)
+    {
+        $this->db->query('SELECT * FROM chapters WHERE id = :id');
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+
+        return $row;
+
+    }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public function addChapter($data)
     {
@@ -36,6 +55,8 @@ class Chapter
         }
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public function updateChapter($data)
     {
         $this->db->query('UPDATE chapters SET title = :title, content = :content WHERE id=:id');
@@ -51,17 +72,8 @@ class Chapter
         }
     }
 
-    public function getChaptersById($id)
-    {
-        $this->db->query('SELECT * FROM chapters WHERE id = :id');
-        $this->db->bind(':id', $id);
 
-        $row = $this->db->single();
-
-        return $row;
-
-    }
-
+    //------------------------------------------------------------------------------------------------------------------
 
     public function deleteChapter($id)
     {
@@ -75,5 +87,7 @@ class Chapter
             return false;
         }
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
 }

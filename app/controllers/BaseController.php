@@ -1,9 +1,9 @@
 <?php
 
-// require_once('model/ChapterManager.php');
 
 class BaseController extends Controller
 {
+    //------------------------------------------------------------------------------------------------------------------
     public function __construct()
     {
         $this->loginModel = $this->model('Login');
@@ -11,12 +11,16 @@ class BaseController extends Controller
         $this->commentModel = $this->model('Comment');
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public function createSession($login)
     {
         $_SESSION['admin_id'] = $login->id;
         $_SESSION['admin_email'] = $login->email;
         header('Location: index.php?action=adminChapters');
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public function adminLogin()
     {
@@ -51,22 +55,20 @@ class BaseController extends Controller
                 if ($this->loginModel->findByEmail($data['email'])) {
                     //email found
                 } else {
-                    $data['email_err'] = 'No user found';
+                    $data['email_err'] = 'Aucun utilisateur trouvé';
                 }
 
                 //make sure errors are empty
                 if (empty($data['email_err']) && empty($data['password_err'])) {
                     //validated
                     //check and set logged user
-
-
                     $loggedInAdmin = $this->loginModel->login($data['email'], $data['password']);
 
                     if ($loggedInAdmin) {
                         //create session
                         $this->createSession($loggedInAdmin);
                     } else {
-                        $data['password_err'] = 'Mot de passe inccorect';
+                        $data['password_err'] = 'Mot de passe invalide';
                         //load view with errors
                         global $twig;
                         $vue = $twig->load('admin.login.html.twig');
@@ -97,6 +99,7 @@ class BaseController extends Controller
 
     }
 
+    //------------------------------------------------------------------------------------------------------------------
 
     public function home()
     {
@@ -106,10 +109,11 @@ class BaseController extends Controller
         $vue = $twig->load('home.html.twig');
         echo $vue->render([
             'chapters' => $chapters,
-            'ben' => 'Beniamin Tolan'
         ]);
 
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public function contact()
     {
@@ -122,11 +126,12 @@ EOD;
         $vue = $twig->load('contact.html.twig');
         echo $vue->render([
             'titre' => "salut",
-            'ben' => 'Beniamin Tolan',
             'contact_message' => $message_contact
         ]);
 
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public function sendMail()
     {
@@ -142,12 +147,12 @@ EOD;
             $mailer = new Swift_Mailer($transport);
 
             // Create a message
-            $message = (new Swift_Message('Wonderful Subject'))
+            $message = (new Swift_Message('JF Blog Subject'))
                 ->setFrom(['noreply@jeanforteroche.me' => 'Blog JF'])
                 ->setReplyTo([$_POST['txtEmail'] => $_POST['txtName']])
                 ->setTo(['beniamin777tolan@gmail.com' => 'Admin JF'])
                 ->setBody('Message: ' . $_POST['txtMsg'])
-                ->addPart('<strong>Message:</strong><p> '.$_POST['txtMsg'].'</p><br/><strong>Telephone:</strong> '.$_POST['txtPhone'], 'text/html');
+                ->addPart('<strong>Message:</strong><p> ' . $_POST['txtMsg'] . '</p><br/><strong>Telephone:</strong> ' . $_POST['txtPhone'], 'text/html');
 
             // Send the message
             $result = $mailer->send($message);
@@ -159,6 +164,8 @@ EOD;
         }
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public function chapters()
     {
         $chapters = $this->chapterModel->getChapters();
@@ -167,13 +174,14 @@ EOD;
         $data = [
             'title' => "Admin Chapters",
             'chapters' => $chapters,
-            'ben' => 'Beniamin Tolan',
             'photoId' => $photoId
         ];
         global $twig;
         $vue = $twig->load('chapters.html.twig');
         echo $vue->render($data);
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public function showChapter()
     {
@@ -183,6 +191,7 @@ EOD;
                     $comment_message
 EOD;
 
+        //comment add
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
@@ -228,7 +237,7 @@ EOD;
                     header('Location: index.php?action=showChapter&id=' . $_GET['id']);
                     flash('comment_message', 'Nouveau commentaire ajouté avec succès');
                 } else {
-                    die('qq terible vien de se passer');
+                    die('Impossible de traiter cette demande à l\'heure actuelle.');
                 }
 
             } else {
@@ -264,6 +273,8 @@ EOD;
         }
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
     public function unapprouve()
     {
         $id = $_GET['comment_id'];
@@ -280,22 +291,23 @@ EOD;
             }
 
         } else {
-            die('Qq du mal se passe');
+            die('Impossible de traiter cette demande à l\'heure actuelle.');
         }
 
     }
 
-
+    //------------------------------------------------------------------------------------------------------------------
     public function bio()
     {
         global $twig;
         $vue = $twig->load('bio.html.twig');
         echo $vue->render([
-            'titre' => "salut",
-            'ben' => 'Beniamin Tolan'
+            'titre' => "salut"
         ]);
 
     }
+
+    //------------------------------------------------------------------------------------------------------------------
 
     public function isLoggedIn()
     {
@@ -305,4 +317,5 @@ EOD;
             return false;
         }
     }
+    //------------------------------------------------------------------------------------------------------------------
 }

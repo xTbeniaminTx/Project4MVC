@@ -4,25 +4,13 @@ class Login
 {
     private $db;
 
+    //------------------------------------------------------------------------------------------------------------------
     public function __construct()
     {
         $this->db = new Database;
     }
 
-    public function findByEmail($email)
-    {
-        $this->db->query('SELECT * FROM login WHERE email = :email');
-        $this->db->bind(':email', $email);
-
-        $row = $this->db->single();
-
-        //check row
-        if ($this->db->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    //------------------------------------------------------------------------------------------------------------------
 
     public function login($email, $password)
     {
@@ -37,5 +25,22 @@ class Login
             return false;
         }
     }
+
+    //------------------------------------------------------------------------------------------------------------------
+    public function findByEmail($email)
+    {
+        $this->db->query('SELECT * FROM login WHERE email = :email');
+        $this->db->bind(':email', $email);
+
+        $row = $this->db->single();
+
+        //check row
+        if ($this->db->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //------------------------------------------------------------------------------------------------------------------
 
 }
