@@ -6,10 +6,7 @@
 
 -j'ai utilisé xaamp et php 7 en dev
 
-User Superadmin:
-'benji@gmail.com'
-Mot de passe super admin:
-'parola'
+
 
 Lien url du site online:
 https://jeanforteroche.tolan.me/
